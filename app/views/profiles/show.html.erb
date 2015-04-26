@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @profile.user.image_url %>
+</p>
+<p>
+  <strong>First Name:</strong>
+  <%= @profile.user.first_name %>
+</p>
+<p>
+  <strong>Last Name:</strong>
+  <%= @profile.user.last_name %>
+</p>
+<p>
+  <strong>Current Title:</strong>
+  <%= @profile.user.headline %>
+</p>
+<p>
+  <strong>Years of experience:</strong>
+  <%= @profile.years_of_experience %>
+</p>
+
+<p>
+  <strong>Experience level:</strong>
+  <%= @profile.experience_level %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @profile.price %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @profile.field %>
+</p>
+
+<p>
+  <strong>Personal URL:</strong>
+  <%= link_to "www.bylder.net/profiles/#{@profile.id}" %>
+</p>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+

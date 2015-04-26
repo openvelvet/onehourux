@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  years_of_experience: MyString
+  experience_level: MyString
+  price: 1
+  field: MyString
+
+two:
+  years_of_experience: MyString
+  experience_level: MyString
+  price: 1
+  field: MyString
