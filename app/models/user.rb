@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
 
-  mount_uploader :image, ImageUploader
+  
 
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
