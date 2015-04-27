@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426212342) do
+ActiveRecord::Schema.define(version: 20150427031435) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 20150426212342) do
     t.string   "summary"
     t.string   "linkedin_url"
     t.string   "image"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
