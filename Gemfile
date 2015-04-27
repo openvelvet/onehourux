@@ -14,9 +14,8 @@ gem 'therubyracer'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-linkedin'
-gem 'carrierwave'
-gem "fog-aws"
 gem "figaro"
+gem "paperclip", "~> 4.2"
 
 group :development, :test do
   gem 'sqlite3'
