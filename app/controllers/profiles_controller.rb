@@ -1,20 +1,25 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update, :destroy]
+  # after_action :check_for_profile, only: [:edit, :update]
 
-  # GET /profiles
-  # GET /profiles.json
-  def index
-    @profiles = Profile.all
-  end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @profile = Profile.find(params[:id])
   end
 
   # GET /profiles/new
   def new
-    @profile = Profile.new
+    if current_user.profile.nil?
+      @profile = Profile.new
+      @disable_nav = true
+    else
+      flash[:alert] = "Dude, you can only create one profile."
+      redirect_to profile_path(current_user.profile)
+    end
   end
 
   # GET /profiles/1/edit
@@ -67,6 +72,18 @@ class ProfilesController < ApplicationController
     def set_profile
       @profile = Profile.find(params[:id])
     end
+
+    def check_user
+      if current_user != @profile.user
+        redirect_to root_url, alert: "Sorry dude, this does not belong to you"
+      end
+    end
+
+    # def check_for_profile
+    #   if current_user.profile.user_id.blank? == false
+    #     redirect_to root_url, alert: "Sorry dude, you already have a profile"
+    #   end
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params

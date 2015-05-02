@@ -1,8 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Image:</strong>
-  <%= image_tag @profile.user.image.url %>
+  <%= image_tag @profile.user.linkedin_photo_url %>
+</p>
+<p>
+  <%= link_to @profile.user.linkedin_url, "#{@profile.user.linkedin_url}" %>
 </p>
 <p>
   <strong>First Name:</strong>
@@ -28,7 +28,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @profile.price %>
+  <%= number_to_currency(@profile.price) %>
 </p>
 
 <p>
@@ -38,8 +38,23 @@
 
 <p>
   <strong>Personal URL:</strong>
-  <%= link_to "www.bylder.net/profiles/#{@profile.id}" %>
+  <%= "www.bylder.net/profiles/#{@profile.id}" %>
 </p>
 
+<!-- <select class="form-control">
+  <optgroup label="Picnic">
+    <option>Mustard</option>
+    <option>Ketchup</option>
+    <option>Relish</option>
+  </optgroup>
+  <optgroup label="Camping">
+    <option>Tent</option>
+    <option>Flashlight</option>
+    <option>Toilet Paper</option>
+  </optgroup>
+</select> -->
+
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
+
+
 

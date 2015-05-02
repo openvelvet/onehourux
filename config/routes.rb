@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  resources :profiles
-
-  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "callbacks" }
+  
+  devise_for :users, :controllers => { sessions: "sessions", :registrations => "registrations", :omniauth_callbacks => "callbacks" }
   resources :products
+  resources :profiles, except: [:index]
 
   root 'products#index'
+
+  # Redirects user to root path and shows an error message
+  get '*a' => redirect { |p, req| req.flash[:error] = "aaargh, you don't want to go to #{p[:a]}"; '/' }
 
 
   # The priority is based upon order of creation: first created -> highest priority.

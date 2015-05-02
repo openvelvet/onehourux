@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_attached_file :image, :styles => { :medium => "300x>", :thumb => "100x100>" }, :default_url => "default.jpeg"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  validates :email, uniqueness: true
+
   
 
   def self.from_omniauth(auth)
@@ -22,7 +24,9 @@ class User < ActiveRecord::Base
         user.industry = auth.info.industry
         user.location = auth.info.location
         user.summary = auth.info.summary
-        user.connections = auth.info.num_connections
+        user.connections = auth.info.connections
+        user.linkedin_photo_url = auth.info.image
+        user.linkedin_url = auth.info.urls.public_profile
       end
   end
 end

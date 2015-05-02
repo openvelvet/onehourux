@@ -10,24 +10,24 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :years_of_experience %><br>
-    <%= f.text_field :years_of_experience %>
+  <div class="form-group">
+    <%= f.label :years_of_experience, "Years of Professional Experience" %>
+    <%= f.text_field :years_of_experience, placeholder: "14", class: "form-control", autofocus: true %>
   </div>
-  <div class="field">
-    <%= f.label :experience_level %><br>
-    <%= f.text_field :experience_level %>
+  <div class="form-group">
+    <%= f.label :experience_level %>
+    <%= f.select(:experience_level, ["Entry Level", "Mid-Level", "Senior-Level", "C-Level"], { prompt: "Select Your Experience Level" }, { class: "form-control" }) %>
   </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
+  <div class="form-group">
+    <%= f.label :price, "Rate for 15 Minutes" %>
+    <%= f.number_field :price, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :field %><br>
-    <%= f.text_field :field %>
+  <div class="form-group">
+    <%= f.label :field, "Industry" %>
+    <%= f.select(:field, ["Accounting", "Designer", "Finance", "Web Developer"], { prompt: "Select Your Industry" }, { class: "form-control" }) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit " Get my Repellent Spray ", class: "button" %>
   </div>
+  
 <% end %>
