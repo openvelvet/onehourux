@@ -2,7 +2,6 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
-  # after_action :check_for_profile, only: [:edit, :update]
 
 
   # GET /profiles/1
@@ -78,12 +77,6 @@ class ProfilesController < ApplicationController
         redirect_to root_url, alert: "Sorry dude, this does not belong to you"
       end
     end
-
-    # def check_for_profile
-    #   if current_user.profile.user_id.blank? == false
-    #     redirect_to root_url, alert: "Sorry dude, you already have a profile"
-    #   end
-    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
