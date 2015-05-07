@@ -3,11 +3,19 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
 
+  def douche
+    @profile = Profile.find(params[:tinder])
+    render "sleeping_beauty"
+  end
+
+  def my_profile
+    @user = current_user
+    render "complete_profile"
+  end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @profile = Profile.find(params[:id])
   end
 
   # GET /profiles/new
@@ -17,12 +25,13 @@ class ProfilesController < ApplicationController
       @disable_nav = true
     else
       flash[:alert] = "Dude, you can only create one profile."
-      redirect_to profile_path(current_user.profile)
+      redirect_to profile_path(:id => current_user.profile_uri)
     end
   end
 
   # GET /profiles/1/edit
   def edit
+    render "profiles/edit"
   end
 
   # POST /profiles
@@ -31,9 +40,13 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
 
+    # Store friendly profile URI
+    current_user.profile_uri = getUniqueURI(current_user) 
+    current_user.save
+
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to complete_profile_path, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -69,11 +82,16 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      if params[:id].to_i != 0
+        @profile = Profile.find(params[:id])
+      else
+        @user = User.find_by_profile_uri(params[:id])
+      end
     end
+      
 
     def check_user
-      if current_user != @profile.user
+      if current_user != @user
         redirect_to root_url, alert: "Sorry dude, this does not belong to you"
       end
     end
@@ -81,5 +99,10 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:years_of_experience, :experience_level, :price, :field)
+    end
+
+    def getUniqueURI(user)
+      pin = current_user.id
+      "#{user.first_name}-#{user.last_name}-#{pin}"
     end
 end

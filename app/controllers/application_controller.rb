@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "Please complete your profile"
       new_profile_path
     else
-      profile_path(current_user.profile)
+      profile_path(:id => current_user.profile_uri)
     end
   end
 

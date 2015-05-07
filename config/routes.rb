@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   
   devise_for :users, :controllers => { sessions: "sessions", :registrations => "registrations", :omniauth_callbacks => "callbacks" }
+  
   resources :products
   resources :profiles, except: [:index]
+
+  get 'complete_profile' => "profiles#my_profile" #show of /profiles/:id
+
+  get 'monkey/:tinder' => "profiles#douche"
 
   root 'products#index'
 
