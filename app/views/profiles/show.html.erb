@@ -3,9 +3,9 @@
         <!-- header -->
         <div class="row header">
             <div class="col-md-8">
-                <%= image_tag(@user.image.url, class: "avatar img-circle", size: "80x80") %>
-                <h3 class="name"><%=  "#{@user.first_name} #{@user.last_name}" %></h3>
-                <span class="area"><%= @user.headline %></span>
+                <%= image_tag(@profile.user.image.url, class: "avatar img-circle", size: "80x80") %>
+                <h3 class="name"><%=  "#{@profile.user.first_name} #{@profile.user.last_name}" %></h3>
+                <span class="area"><%= @profile.user.headline %></span>
             </div>
             <a class="btn-flat icon pull-right delete-user" data-toggle="tooltip" title="Delete user" data-placement="top">
                 <i class="icon-trash"></i>

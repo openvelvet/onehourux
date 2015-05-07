@@ -18,8 +18,8 @@
                           <li><%= link_to "Create Profile", new_profile_path %></li>                         
                         <% else %>
                           <li><%= link_to "Account Settings", edit_user_registration_path %></li>
-                          <li><%= link_to "Edit Profile", edit_profile_path(current_user.profile.id) %></li>
-                          <li><%= link_to "View Profile", profile_path(current_user.profile.id) %></li>
+                          <li><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></li>
+                          <li><%= link_to "View Profile", profile_path(current_user.profile) %></li>
                         <% end %>
                       </ul>
                   </li>

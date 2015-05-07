@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  devise_for :users, :controllers => { sessions: "sessions", :registrations => "registrations", :omniauth_callbacks => "callbacks" }
+  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "callbacks" }
   
   resources :products
   resources :profiles, except: [:index]

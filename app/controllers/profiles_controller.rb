@@ -31,7 +31,6 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    render "profiles/edit"
   end
 
   # POST /profiles
@@ -84,6 +83,7 @@ class ProfilesController < ApplicationController
     def set_profile
       if params[:id].to_i != 0
         @profile = Profile.find(params[:id])
+        # @user = User.find(params[:id])
       else
         @user = User.find_by_profile_uri(params[:id])
       end
@@ -91,8 +91,8 @@ class ProfilesController < ApplicationController
       
 
     def check_user
-      if current_user != @user
-        redirect_to root_url, alert: "Sorry dude, this does not belong to you"
+      if current_user != @profile.user
+        redirect_to root_url, alert: "Sorry, this does not belong to you"
       end
     end
 
