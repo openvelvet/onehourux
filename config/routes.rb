@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
   
+  # devise
   devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "callbacks" }
   
   resources :products
   resources :profiles, except: [:index]
 
-  get 'complete_profile' => "profiles#my_profile" #show of /profiles/:id
+  # profiles controller
+  get 'complete_profile' => "profiles#complete_profile" #show of /profiles/:id
 
-  get 'monkey/:tinder' => "profiles#douche"
+  # routes for pages controller
+  get 'pages/about'
+  get 'pages/contact'
+  get 'home' => "pages/home"
 
-  root 'products#index'
+  # Home page
+  root 'pages#home'
 
   # Redirects user to root path and shows an error message
   get '*a' => redirect { |p, req| req.flash[:error] = "aaargh, you don't want to go to #{p[:a]}"; '/' }

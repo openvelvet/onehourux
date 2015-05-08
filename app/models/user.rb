@@ -23,10 +23,11 @@ class User < ActiveRecord::Base
         user.last_name = auth.info.last_name
         user.industry = auth.info.industry
         user.location = auth.info.location
-        user.summary = auth.info.summary
-        user.connections = auth.info.connections
+        user.summary = auth.extra.raw_info.summary
+        user.connections = auth.extra.raw_info.numConnections
         user.linkedin_photo_url = auth.info.image
         user.linkedin_url = auth.info.urls.public_profile
+        user.linkedin_position = auth.extra.raw_info.languages
       end
   end
 end

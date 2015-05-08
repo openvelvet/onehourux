@@ -28,14 +28,16 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "Please complete your profile"
       new_profile_path
     else
-      profile_path(:id => current_user.profile_uri)
+      # Routing to the profile-URI
+      # profile_path(:id => current_user.profile_uri)
+      profile_path(current_user.profile)
     end
   end
 
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :headline, :industry, :connections, :location, :summary, :linkedin_url, :image, :linkedin_photo_url]
+    devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :headline, :industry, :connections, :location, :summary, :linkedin_url, :linkedin_photo_url, :linkedin_position]
     devise_parameter_sanitizer.for(:account_update) << [:image]
   end
 end

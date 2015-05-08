@@ -3,17 +3,29 @@
         <!-- header -->
         <div class="row header">
             <div class="col-md-8">
-                <%= image_tag(@profile.user.image.url, class: "avatar img-circle", size: "80x80") %>
+                <% if @profile.user.linkedin_photo_url.present? %>
+                    <%= image_tag(@profile.user.linkedin_photo_url, class: "avatar img-circle", size: "80x80") %>
+                <% else %>
+                    <%= image_tag(@profile.user.image.url, class: "avatar img-circle", size: "80x80") %>
+                <% end %>
                 <h3 class="name"><%=  "#{@profile.user.first_name} #{@profile.user.last_name}" %></h3>
-                <span class="area"><%= @profile.user.headline %></span>
+                <h4 class="area"><%= @profile.user.headline %></h4><br>
+                <span class="area"><%= @profile.user.location %> |</span>  
+                <span class="area">LinkedIn Connections: <%= @profile.user.connections %> |</span>
+                <span class="area"><%= @profile.user.industry %></span>
             </div>
-            <a class="btn-flat icon pull-right delete-user" data-toggle="tooltip" title="Delete user" data-placement="top">
-                <i class="icon-trash"></i>
-            </a>
-            <%= link_to "Hire Me Now", root_path, class: "button pull-right" %>
-             <!-- <a class="btn-flat icon large pull-right edit">
-                Edit this person
-            </a> -->
+            <div class="col-md-4">
+                <div class="row">
+                    <%= link_to "Hire Me Now", root_path, class: "button pull-right" %>
+                </div>
+                <div class="row">
+                    <h2 class="name pull-right"><%= number_to_currency(@profile.price) %></h2>
+                </div>
+                <div class="row">
+                    <p class="pull-right">For 15 Minutes</p>
+                </div>
+            </div>
+            
         </div><br>
 
         <div class="row profile">
@@ -22,11 +34,11 @@
                 <div class="profile-box">
                     <!-- biography -->
                     <div class="col-md-12 section">
-                        <h6>Biography</h6>
-                        <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
+                        <h6>Professional Summary</h6>
+                        <p><%= @profile.user.summary %></p>
                     </div>
 
-                    <h6>Recent orders</h6>
+                    <h6>Portfolio</h6>
                     <br>
                     <!-- recent orders table -->
                     <table class="table table-hover">
@@ -112,8 +124,8 @@
             </div>
 
             <!-- side address column -->
-            <div class="col-md-3 col-xs-12 address pull-right">
-                <h6>Address</h6>
+            <!-- <div class="col-md-3 col-xs-12 address pull-right">
+                <h6>Location</h6>
                 <iframe width="300" height="133" scrolling="no" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
                 <ul>
                     <li>2301 East Lamar Blvd. Suite 140. </li>
@@ -128,7 +140,7 @@
                         <a href="#">alejandra@detail.com</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

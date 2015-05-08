@@ -18,3 +18,11 @@
 //= require "profiles.coffee"
 //= require "theme.js"
 
+
+// Bootstrap alert to disappear after 3 seconds
+window.setTimeout(function() {
+$(".alert").slideUp(500, function(){
+  $(this).remove(); 
+    });
+}, 3000);
+

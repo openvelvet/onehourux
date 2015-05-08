@@ -275,5 +275,5 @@ Devise.setup do |config|
   #ID first, secret second
   config.omniauth :linkedin, ENV["LINKEDIN_KEY_ID"], ENV["LINKEDIN_ACCESS_KEY"],
                   :scope => 'r_fullprofile r_emailaddress r_network',
-                  :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "summary"]
+                  :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "num-connections", "summary", "three-current-positions", "languages"]
 end

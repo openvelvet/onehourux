@@ -3,14 +3,8 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
 
-  def douche
-    @profile = Profile.find(params[:tinder])
-    render "sleeping_beauty"
-  end
-
-  def my_profile
+  def complete_profile
     @user = current_user
-    render "complete_profile"
   end
 
   # GET /profiles/1
