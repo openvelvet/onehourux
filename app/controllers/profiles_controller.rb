@@ -2,9 +2,14 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :check_connections, only: [:new, :create]
 
   def complete_profile
     @user = current_user
+  end
+
+  def index
+    @profiles = Profile.all
   end
 
   # GET /profiles/1
@@ -19,7 +24,7 @@ class ProfilesController < ApplicationController
       @disable_nav = true
     else
       flash[:alert] = "Dude, you can only create one profile."
-      redirect_to profile_path(:id => current_user.profile_uri)
+      redirect_to profile_path(current_user.profile)
     end
   end
 
@@ -87,6 +92,12 @@ class ProfilesController < ApplicationController
     def check_user
       if current_user != @profile.user
         redirect_to root_url, alert: "Sorry, this does not belong to you"
+      end
+    end
+
+    def check_connections
+      if current_user.connections.nil?
+        redirect_to root_url, alert: "Sorry, you are a recruiter not a user"
       end
     end
 

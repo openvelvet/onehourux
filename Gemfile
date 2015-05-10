@@ -16,6 +16,8 @@ gem 'omniauth'
 gem 'omniauth-linkedin'
 gem "figaro"
 gem "paperclip", "~> 4.2"
+gem "font-awesome-rails"
+gem 'bootstrap-social-rails'
 
 group :development, :test do
   gem 'sqlite3'

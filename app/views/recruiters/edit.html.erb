@@ -1,0 +1,33 @@
+<%= form_for(@recruiter) do |f| %>
+  <% if @recruiter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recruiter.errors.count, "error") %> prohibited this recruiter from being saved:</h2>
+
+      <ul>
+      <% @recruiter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :title, "Current Title" %>
+    <%= f.text_field :title, placeholder: "Executive Recruiter", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :company_name, "Company Name" %>
+    <%= f.text_field :company_name, placeholder: "Kline & Associates", class: "form-control", autofocus: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :company_location, "Location" %>
+    <%= f.text_field :company_location, placeholder: "Los Angeles, CA", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone_number, "Phone Number" %>
+    <%= f.text_field :phone_number, placeholder: "(818) 555-4488", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit " Complete my profile ", class: "button button-small" %>
+  </div>
+  
+<% end %>

@@ -1,12 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
-  
-  
+
   
   protected
-
-  def after_sign_up_path_for(resource)
-    '/profiles/new'
-  end
 
   def update_resource(resource, params)
     if current_user.provider == "linkedin"
@@ -16,4 +11,13 @@ class RegistrationsController < Devise::RegistrationsController
       resource.update_with_password(params)
     end
   end
+
+  def after_update_path_for(resource)
+    if current_user.connections.nil?
+    	profiles_path
+    else
+    	profile_path(current_user.profile)
+    end
+  end
+
 end

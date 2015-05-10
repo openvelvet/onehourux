@@ -6,31 +6,30 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
- #  def after_sign_in_path_for(resource_or_scope)
-	#     if resource.sign_in_count == 1 
-	#        new_profile_path
-	#     else
-	#        profile_path(current_user.profile.id)
-	#     end
-	# end
-
-  # def after_sign_in_path_for(resource)
-  #   unless current_user.profile.nil?
-  #     profiles_path 
-  #   else
-  #     flash[:alert] = "Please complete your profile"
-  #     new_profile_path
-  #   end
-  # end
-
   def after_sign_in_path_for(resource)
-    if current_user.profile.nil?
-      flash[:alert] = "Please complete your profile"
-      new_profile_path
+    if current_user.connections.nil?
+      if current_user.recruiter.nil?
+        new_recruiter_path
+      else
+        profiles_path
+      end
     else
-      # Routing to the profile-URI
-      # profile_path(:id => current_user.profile_uri)
-      profile_path(current_user.profile)
+      if current_user.profile.nil?
+        flash[:alert] = "Please complete your profile"
+        new_profile_path
+      else
+        # Routing to the profile-URI
+        # profile_path(:id => current_user.profile_uri)
+        profile_path(current_user.profile)
+      end
+    end
+  end
+  
+  def after_sign_up_path_for(resource)
+    if current_user.connections.nil?
+      '/recruiters/new'
+    else
+      "/profiles/new"
     end
   end
 

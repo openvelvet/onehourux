@@ -15,5 +15,7 @@
  *= require "animate.css.scss"
  *= require "profiles.scss"
  *= require "detail_admin_theme/icons.css.scss"
+ *= require font-awesome
+ *= require bootstrap-social
  */
 
