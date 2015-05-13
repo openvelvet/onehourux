@@ -18,6 +18,7 @@ gem "figaro"
 gem "paperclip", "~> 4.2"
 gem "font-awesome-rails"
 gem 'bootstrap-social-rails'
+gem 'stripe'
 
 group :development, :test do
   gem 'sqlite3'

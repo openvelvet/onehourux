@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
   has_one :recruiter, dependent: :destroy
+  has_many :sales, class_name: "Order", foreign_key: "seller_id"
+  has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
 
   has_attached_file :image, :styles => { :medium => "300x>", :thumb => "100x100>" }, :default_url => "default.jpg"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/

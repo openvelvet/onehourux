@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-4">
                 <div class="row">
-                    <%= link_to "Hire Me Now", root_path, class: "button pull-right" %>
+                    <%= link_to "Hire Me Now", new_profile_order_path(@profile), class: "button pull-right" %>
                 </div>
                 <div class="row">
                     <h2 class="name pull-right"><%= number_to_currency(@profile.price) %></h2>

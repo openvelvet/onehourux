@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  
+
   resources :recruiters, except: [:index, :show]
 
   # devise for users
@@ -10,7 +12,10 @@ Rails.application.routes.draw do
   end
 
   resources :products
-  resources :profiles
+  
+  resources :profiles do
+    resources :orders
+  end
 
   # profiles controller
   get 'complete_profile' => "profiles#complete_profile" #show of /profiles/:id
