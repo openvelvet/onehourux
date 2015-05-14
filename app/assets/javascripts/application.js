@@ -16,6 +16,7 @@
 //= require "bootstrap.min.js"
 //= require "products.coffee"
 //= require "profiles.coffee"
+//= require "orders.coffee"
 //= require "theme.js"
 
 
