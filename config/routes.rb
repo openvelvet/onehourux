@@ -8,17 +8,20 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "callbacks" }
   devise_scope :user do
     get "/login" => "devise/sessions#new"
-    
   end
 
   resources :products
   
   resources :profiles do
-    resources :orders
+    resources :orders 
   end
+
+  get "sales" => "orders#sales"
 
   # profiles controller
   get 'complete_profile' => "profiles#complete_profile" #show of /profiles/:id
+  put 'complete_purchase' => "orders#complete_purchase"
+
 
   # routes for pages controller
   get 'pages/about'

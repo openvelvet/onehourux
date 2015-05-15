@@ -38,6 +38,18 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
 
+    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+    token = params[:stripeToken]
+
+    stripe_account = Stripe::Account.create( 
+      :managed => true, 
+      :country => 'US', 
+      :email => current_user.email,
+      :bank_account => token, 
+      ) 
+
+    current_user.stripe_account = stripe_account.id
+
     # Store friendly profile URI
     current_user.profile_uri = getUniqueURI(current_user) 
     current_user.save

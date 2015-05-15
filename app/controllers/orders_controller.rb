@@ -2,6 +2,25 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
+  def complete_purchase
+
+    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+    token = params[:stripeToken]
+
+    Stripe::Transfer.create(
+      :amount => 96,
+      :currency => "usd",
+      :destination => "acct_162JKPCYNBPaes5x",
+      :description => "Transfer for test@example.com"
+    )
+
+    redirect_to root_path
+  end
+
+  def sales
+    @orders = Order.all.where(seller: current_user).order("created_at DESC")
+  end
+
   # GET /orders
   # GET /orders.json
   def index
@@ -39,7 +58,7 @@ class OrdersController < ApplicationController
 
     begin
       charge = Stripe::Charge.create(
-        :amount => (@profile.price * 100).floor,
+        :amount => (@profile.price * 105).floor,
         :currency => "usd",
         :card => token
         )
@@ -47,6 +66,8 @@ class OrdersController < ApplicationController
     rescue Stripe::CardError => e
       flash[:danger] = e.message
     end
+
+    
 
 
     respond_to do |format|

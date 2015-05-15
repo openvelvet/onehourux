@@ -19,6 +19,7 @@ gem "paperclip", "~> 4.2"
 gem "font-awesome-rails"
 gem 'bootstrap-social-rails'
 gem 'stripe'
+gem 'mailboxer'
 
 group :development, :test do
   gem 'sqlite3'

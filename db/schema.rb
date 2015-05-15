@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510221137) do
+ActiveRecord::Schema.define(version: 20150514100421) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "address"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20150510221137) do
     t.string   "linkedin_photo_url"
     t.string   "profile_uri"
     t.string   "linkedin_position"
+    t.string   "stripe_account"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
