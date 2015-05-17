@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/login" => "devise/sessions#new"
   end
-
-  resources :products
   
   resources :profiles do
     resources :orders 

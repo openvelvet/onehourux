@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
       :amount => (@order.amount * 0.8572).floor,
       :currency => "usd",
       :destination => current_user.stripe_account,
-      :description => "Transfer for test@example.com",
+      :description => "MY FRRIIIEENNDD",
       :source_transaction => @order.charge_id
     )
     redirect_to root_path

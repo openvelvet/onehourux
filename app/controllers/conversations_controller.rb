@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    
+    @user = User.find(155)
   end
 
   def create
