@@ -2,23 +2,34 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
+  
+
+  # Transfer Funds to Seller/Put method
   def complete_purchase
+
+    @order = Order.find(params[:id])
 
     Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
     token = params[:stripeToken]
 
     Stripe::Transfer.create(
-      :amount => 96,
+      :amount => (@order.amount * 0.8572).floor,
       :currency => "usd",
-      :destination => "acct_162JKPCYNBPaes5x",
-      :description => "Transfer for test@example.com"
+      :destination => current_user.stripe_account,
+      :description => "Transfer for test@example.com",
+      :source_transaction => @order.charge_id
     )
-
     redirect_to root_path
+  end
+
+  def cindarella
+    @cid = params[:id]
+    @kim = params[:home_number]
   end
 
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
+
   end
 
   # GET /orders
@@ -60,15 +71,16 @@ class OrdersController < ApplicationController
       charge = Stripe::Charge.create(
         :amount => (@profile.price * 105).floor,
         :currency => "usd",
-        :card => token
+        :card => token,
         )
       flash[:notice] = "Thanks for ordering!"
     rescue Stripe::CardError => e
       flash[:danger] = e.message
     end
 
-    
-
+    @order.charge_id = charge.id
+    @order.amount = charge.amount
+    current_user.save
 
     respond_to do |format|
       if @order.save

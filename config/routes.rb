@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
   
-  
+  # Mailbox routes
+  get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
+  get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
+  get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
+
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
 
   resources :recruiters, except: [:index, :show]
 
@@ -16,13 +27,14 @@ Rails.application.routes.draw do
     resources :orders 
   end
 
+  post '/complete_purchase/:id' => "orders#complete_purchase", as: :complete_purchase
+  get 'cindarella/:id' => "orders#cindarella"
+  
   get "sales" => "orders#sales"
 
   # profiles controller
   get 'complete_profile' => "profiles#complete_profile" #show of /profiles/:id
-  put 'complete_purchase' => "orders#complete_purchase"
-
-
+  
   # routes for pages controller
   get 'pages/about'
   get 'pages/contact'

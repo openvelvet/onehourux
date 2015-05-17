@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Rails bylderDevelopment: development" uuid="d30a350b-0c13-4f15-b563-aac783232522">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails bylderDevelopment: test" uuid="cea09a6e-5936-4ba6-9fe0-102861e9939b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

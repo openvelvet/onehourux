@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
-  before_action :check_connections, only: [:new, :create]
+  
 
   def complete_profile
     @user = current_user
@@ -107,11 +107,7 @@ class ProfilesController < ApplicationController
       end
     end
 
-    def check_connections
-      if current_user.connections.nil?
-        redirect_to root_url, alert: "Sorry, you are a recruiter not a user"
-      end
-    end
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params

@@ -6,5 +6,6 @@ class PagesController < ApplicationController
   end
 
   def contact
+  	@cuntact = params[:funky]
   end
 end

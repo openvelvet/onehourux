@@ -22,6 +22,14 @@
                     </ul>
                 </li>
                 <li class="dropdown">
+                  <%= link_to mailbox_inbox_path do %>
+                    Inbox <% unless unread_messages_count == 0 %>
+                    <span class="label label-danger pull-right"><%=unread_messages_count%></span>
+                  <% end %>
+                  <% end %>
+                  
+                </li>
+                <li class="dropdown">
                   <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
                 </li>
               <% else %>

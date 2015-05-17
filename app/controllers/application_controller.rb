@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :mailbox, :conversation
+
+
   def after_sign_in_path_for(resource)
     if current_user.connections.nil?
       if current_user.recruiter.nil?
@@ -31,6 +34,16 @@ class ApplicationController < ActionController::Base
     else
       "/profiles/new"
     end
+  end
+
+  private
+  
+  def mailbox
+    @mailbox ||= current_user.mailbox
+  end
+
+  def conversation
+    @conversation ||= mailbox.conversations.find(params[:id])
   end
 
   protected

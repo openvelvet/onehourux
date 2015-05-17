@@ -19,12 +19,17 @@
                     <%= link_to "Hire Me Now", new_profile_order_path(@profile), class: "button pull-right", data: { no_turbolink: true } %>
                 </div>
                 <div class="row">
+                    <%= link_to "Message Me Now", new_conversation_path, class: "button pull-right" %>
+                </div>
+                <div class="row">
                     <h2 class="name pull-right"><%= number_to_currency(@profile.price) %></h2>
                 </div>
                 <div class="row">
                     <p class="pull-right">For 15 Minutes</p>
                 </div>
             </div>
+
+           
             
         </div><br>
 
