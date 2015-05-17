@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require "bootstrap.min.js"
-//= require "products.coffee"
 //= require "orders.coffee"
 //= require "profiles.coffee"
 //= require "theme.js"
