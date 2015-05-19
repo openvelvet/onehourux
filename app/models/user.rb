@@ -8,20 +8,20 @@ class User < ActiveRecord::Base
   has_many :sales, class_name: "Order", foreign_key: "seller_id"
   has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
 
-  acts_as_messageable
-
   has_attached_file :image, :styles => { :medium => "300x>", :thumb => "100x100>" }, :default_url => "default.jpg"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   validates :email, uniqueness: true
 
-  def mailboxer_name
-    self.name
-  end
+  acts_as_messageable
 
   def mailboxer_email(object)
-    self.email
-  end
+    #Check if an email should be sent for that object
+      #if true
+        return email
+      #if false
+        #return nil
+    end
 
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

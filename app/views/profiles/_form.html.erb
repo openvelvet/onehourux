@@ -14,33 +14,56 @@
   <div id="stripe_error" class="alert alert-danger" style="display:none">
     <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
   </div>
-
+  <% if current_user.headline.nil? %>
+    <div class="form-group">
+      <%= f.label :title, "Current Title" %>
+      <%= f.text_field :title, placeholder: "Enter title", class: "form-control", autofocus: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :company, "Employer" %>
+      <%= f.text_field :company, placeholder: "Enter company", class: "form-control", autofocus: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :location, "Location" %>
+      <%= f.text_field :location, placeholder: "Enter location", class: "form-control", autofocus: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :image, "image" %>
+      <%= f.file_field :image, placeholder: "Enter image", class: "form-control", autofocus: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :linked_link, "Employer" %>
+      <%= f.text_field :linked_link, placeholder: "Enter LinkedIn profile link", class: "form-control", autofocus: true %>
+    </div>
+  <% end %>
   <div class="form-group">
-    <%= f.label :years_of_experience, "Years of Professional Experience" %>
-    <%= f.text_field :years_of_experience, placeholder: "14", class: "form-control", autofocus: true %>
+    <%= f.label :portfolio_link, "Link to Portfolio" %>
+    <%= f.text_field :portfolio_link, placeholder: "Enter url to portfolio", class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :experience_level %>
     <%= f.select(:experience_level, ["Entry Level", "Mid-Level", "Senior-Level", "C-Level"], { prompt: "Select Your Experience Level" }, { class: "form-control" }) %>
   </div>
   <div class="form-group">
-    <%= f.label :price, "Rate for 15 Minutes" %>
-    <%= f.number_field :price, class: "form-control" %>
+    <%= f.label :years_of_experience, "Years of Experience" %>
+    <%= f.text_field :years_of_experience, placeholder: "Enter number of years", class: "form-control", autofocus: true %>
   </div>
   <div class="form-group">
-    <%= f.label :field, "Industry" %>
-    <%= f.select(:field, ["Accounting", "Designer", "Finance", "Web Developer"], { prompt: "Select Your Industry" }, { class: "form-control" }) %>
+    <%= f.label :price, "Hourly Rate in USD" %>
+    <%= f.number_field :price, class: "form-control", placeholder: "Enter dollar amount" %>
   </div>
+  
+  
 
-  <h1>Bank Account Information</h1>
+  <h3>Bank Account Information</h3>
 
   <div class="form-group">
     <%= label_tag :country %>
-    <%= text_field_tag :country, nil, { :name => nil, :'data-stripe' => "country", class: "form-control" } %>
+    <%= text_field_tag :country, nil, { :name => nil, :'data-stripe' => "country", class: "form-control", placeholder: "Enter US for United States" } %>
   </div>
   <div class="form-group">
     <%= label_tag :routing_number %>
-    <%= text_field_tag :routing_number, nil, { :name => nil, :'data-stripe' => "routingNumber", class: "form-control" } %>
+    <%= text_field_tag :routing_number, nil, { :name => nil, :'data-stripe' => "routingNumber", class: "form-control", placeholder: "Enter routing number" } %>
   </div>
   <div class="form-group">
     <%= label_tag :account_number %>
@@ -48,7 +71,7 @@
   </div>
   
   <div class="form-group">
-    <%= f.submit " Get my Repellent Spray ", class: "button button-small" %>
+    <%= f.submit " Complete My Profile ", class: "button button-small" %>
   </div>
   
 <% end %>

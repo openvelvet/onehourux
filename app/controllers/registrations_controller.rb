@@ -1,6 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :disable_nav, only: [:new]
 
-  
+  private
+
+  def disable_nav
+    @disable_nav = true
+  end
+
   protected
 
   def update_resource(resource, params)

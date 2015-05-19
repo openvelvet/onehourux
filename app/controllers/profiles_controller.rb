@@ -15,6 +15,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @user = @profile.user.id 
   end
 
   # GET /profiles/new
@@ -56,7 +57,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to complete_profile_path, notice: 'Profile was successfully created.' }
+        format.html { redirect_to profile_path(@profile), notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -111,7 +112,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:years_of_experience, :experience_level, :price, :field)
+      params.require(:profile).permit(:years_of_experience, :experience_level, :price, :portfolio_link, :linked_link, :location, :company, :title, :summary)
     end
 
     def getUniqueURI(user)

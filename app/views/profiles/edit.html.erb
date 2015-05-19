@@ -1,6 +1,26 @@
-<h1>Editing Profile</h1>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<h2>Edit Profile</h2>
+		</div>
+	</div>
+	<section id="edit-profile">
+		<div class="col-md-3">
+			<div class="form-group">
+				<%= image_tag "feature1.png", class: "img-circle", width: "100px", height: "100px" %>
+			</div>
+			<div class="form-group">
+				<%= label_tag :image, "Upload new image" %>
+				<%= file_field_tag :image %>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<%= render 'form' %>
+		</div>
+	</section>
+</div> <!-- close row -->
 
-<%= render 'form' %>
+
 
 <%= link_to "Show", @profile %>
 

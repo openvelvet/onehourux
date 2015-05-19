@@ -10,13 +10,6 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    if current_user.connections.nil?
-      if current_user.recruiter.nil?
-        new_recruiter_path
-      else
-        profiles_path
-      end
-    else
       if current_user.profile.nil?
         flash[:alert] = "Please complete your profile"
         new_profile_path
@@ -25,7 +18,6 @@ class ApplicationController < ActionController::Base
         # profile_path(:id => current_user.profile_uri)
         profile_path(current_user.profile)
       end
-    end
   end
   
   def after_sign_up_path_for(resource)

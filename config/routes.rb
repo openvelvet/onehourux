@@ -1,22 +1,27 @@
 Rails.application.routes.draw do
   
-  # Mailbox routes
-  get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
-  get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
-  get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
-
-  resources :conversations do
-    member do
-      post :reply
-      post :trash
-      post :untrash
-    end
+  get "/messages" => redirect("/conversations")
+  resources :messages do
+  member do
+    post :new
   end
+end
+resources :conversations do
+  member do
+    post :reply
+    post :trash
+    post :untrash
+  end
+ collection do
+    get :trashbin
+    post :empty_trash
+ end
+end
 
   resources :recruiters, except: [:index, :show]
 
   # devise for users
-  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "callbacks" }
+  devise_for :users, :controllers => { :sessions => "sessions", :registrations => "registrations", :omniauth_callbacks => "callbacks" }
   devise_scope :user do
     get "/login" => "devise/sessions#new"
   end
@@ -37,6 +42,7 @@ Rails.application.routes.draw do
   get 'pages/about'
   get 'pages/contact'
   get 'home' => "pages/home"
+  get 'pages/type'
 
   # Home page
   root 'pages#home'

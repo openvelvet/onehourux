@@ -20,6 +20,8 @@ gem "font-awesome-rails"
 gem 'bootstrap-social-rails'
 gem 'stripe'
 gem 'mailboxer'
+gem 'autoprefixer-rails'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'sqlite3'

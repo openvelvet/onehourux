@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to root_path }
+        format.html { redirect_to new_message_path(:user => @seller) }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }

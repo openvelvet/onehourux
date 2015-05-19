@@ -17,7 +17,7 @@
                       <%- if devise_mapping.omniauthable? %>
                         <%- resource_class.omniauth_providers.each do |provider| %>
                           <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-lg btn-block btn-social btn-linkedin" do %>
-                            <i class="fa fa-linkedin"></i><%= "Sign in with #{provider.to_s.titleize}" %>
+                            <i class="fa fa-linkedin"></i><%= "#{provider.to_s.titleize} Sign In" %>
                           <% end %>
                         <% end -%> 
                       <% end %>
@@ -39,7 +39,7 @@
                       </label>
                     </div>
                     <div class="submit">
-                      <%= f.submit "Log in", class: "button button-small" %>
+                      <%= f.submit "Log in", class: "button" %>
                     </div>
                 </form>
               </div>
