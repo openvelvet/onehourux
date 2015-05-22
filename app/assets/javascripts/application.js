@@ -17,6 +17,7 @@
 //= require "orders.coffee"
 //= require "profiles.coffee"
 //= require "theme.js"
+//= require "jquery.raty.js"
 
 
 // Bootstrap alert to disappear after 3 seconds

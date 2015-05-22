@@ -7,19 +7,25 @@ class OrdersController < ApplicationController
   # Transfer Funds to Seller/Put method
   def complete_purchase
 
-    @order = Order.find(params[:id])
+    if current_user.stripe_account.present?
+      @order = Order.find(params[:id])
 
-    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-    token = params[:stripeToken]
+      Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+      token = params[:stripeToken]
 
-    Stripe::Transfer.create(
-      :amount => (@order.amount * 0.8572).floor,
-      :currency => "usd",
-      :destination => current_user.stripe_account,
-      :description => "MY FRRIIIEENNDD",
-      :source_transaction => @order.charge_id
-    )
-    redirect_to root_path
+      Stripe::Transfer.create(
+        :amount => (@order.amount * 0.8572).floor,
+        :currency => "usd",
+        :destination => current_user.stripe_account,
+        :description => "MY FRRIIIEENNDD",
+        :source_transaction => @order.charge_id
+      )
+      redirect_to root_path
+    else
+      flash[:alert] = "Please add your bank account information."
+      redirect_to bank_account_path(current_user.profile.id)
+    end
+
   end
 
   def cindarella

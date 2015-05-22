@@ -6,7 +6,7 @@
                 <% if @profile.user.linkedin_photo_url.present? %>
                     <%= image_tag(@profile.user.linkedin_photo_url, class: "avatar img-circle", size: "80x80") %>
                 <% else %>
-                    <%= image_tag(@profile.user.image.url, class: "avatar img-circle", size: "80x80") %>
+                    <%= image_tag(@profile.user.image.url, class: "avatar img-circle", size: "100x100") %>
                 <% end %>
                 <h3 class="name"><%=  "#{@profile.user.first_name} #{@profile.user.last_name}" %></h3>
                 <h4 class="area"><%= @profile.user.headline %></h4><br>
@@ -34,6 +34,17 @@
         </div><br>
 
         <div class="row profile">
+            <div class="form-inline">
+                <div class="form-group">
+                    <%= "#{@average_rating}/5.00" %>
+                </div>
+                <div class="form-group">
+                    <div class="star-rating" data-score= <%= @average_rating %> ></div>
+                </div>
+            </div>
+
+            <%= "#{@reviews.length} Reviews" %>
+            
             <!-- bio, new note & orders column -->
             <div class="col-md-9 bio">
                 <div class="profile-box">
@@ -43,75 +54,16 @@
                         <p><%= @profile.user.summary %></p>
                     </div>
 
-                    <h6>Portfolio</h6>
-                    <br>
-                    <!-- recent orders table -->
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-md-2">
-                                    Order ID
-                                </th>
-                                <th class="col-md-3">
-                                    <span class="line"></span>
-                                    Date
-                                </th>
-                                <th class="col-md-3">
-                                    <span class="line"></span>
-                                    Items
-                                </th>
-                                <th class="col-md-3">
-                                    <span class="line"></span>
-                                    Total amount
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- row -->
-                            <tr class="first">
-                                <td>
-                                    <a href="#">#459</a>
-                                </td>
-                                <td>
-                                    Jan 03, 2013
-                                </td>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    $ 3,500.00
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">#510</a>
-                                </td>
-                                <td>
-                                    Feb 22, 2013
-                                </td>
-                                <td>
-                                    5
-                                </td>
-                                <td>
-                                    $ 800.00
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">#618</a>
-                                </td>
-                                <td>
-                                    Jan 03, 2013
-                                </td>
-                                <td>
-                                    8
-                                </td>
-                                <td>
-                                    $ 3,499.99
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h6>Reviews</h6>
+
+                   <% @reviews.each do |review| %>
+                        <div class="star-rating" data-score= <%= review.rating %> ></div>
+                        <p><%= review.title %></p>
+                        <p><%= review.comment %></p>
+                        <p><%= review.created_at.strftime("%m/%d/%Y") %></p>
+                   <% end %>
+
+                   
 
                     <!-- new comment form -->
                     <div class="col-md-12 section comment">
@@ -149,4 +101,14 @@
         </div>
     </div>
 </div>
-<!-- end main container
+<!-- end main container -->
+
+<script>
+  $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/yelp-demo-2014/Stars/',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>

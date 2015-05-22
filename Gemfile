@@ -22,6 +22,7 @@ gem 'stripe'
 gem 'mailboxer'
 gem 'autoprefixer-rails'
 gem 'will_paginate-bootstrap'
+gem 'bootstrap-sass', '3.3.0.0'
 
 group :development, :test do
   gem 'sqlite3'

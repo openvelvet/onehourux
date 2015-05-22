@@ -4,15 +4,15 @@ jQuery ->
 
 profile =
   setupForm: ->
-    $('#new_profile').submit ->
+    $('#bank_account').submit ->
         $('input[type=submit]').attr('disabled', true)
-        Stripe.bankAccount.createToken($('#new_profile'), profile.handleStripeResponse)
+        Stripe.bankAccount.createToken($('#bank_account'), profile.handleStripeResponse)
         false
 
   handleStripeResponse: (status, response) ->
     if status == 200
-      $('#new_profile').append($('<input type="hidden" name="stripeToken" />').val(response.id))
-      $('#new_profile')[0].submit()
+      $('#bank_account').append($('<input type="hidden" name="stripeToken" />').val(response.id))
+      $('#bank_account')[0].submit()
     else
       alert(response.error.message)
       $('input[type=submit]').attr('disabled', false)

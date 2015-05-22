@@ -1,8 +1,39 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :bank_account, :update_bank_account]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :bank_account, :update_bank_account]
+  before_action :check_user, only: [:edit, :update, :destroy, :bank_account, :update_bank_account]
   
+
+  def bank_account
+
+  end
+
+  def update_bank_account
+    @profile.user_id = current_user.id
+
+    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+    token = params[:stripeToken]
+
+    stripe_account = Stripe::Account.create( 
+      :managed => true, 
+      :country => 'US', 
+      :email => current_user.email,
+      :bank_account => token, 
+      ) 
+
+    current_user.stripe_account = stripe_account.id
+    current_user.save
+
+    respond_to do |format|
+      if @profile.save
+        format.html { redirect_to profile_path(@profile), notice: 'Profile was successfully created.' }
+        format.json { render :show, status: :created, location: @profile }
+      else
+        format.html { render :new }
+        format.json { render json: @profile.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def complete_profile
     @user = current_user
@@ -16,6 +47,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     @user = @profile.user.id 
+    @reviews = Review.where(:profile_id => @profile.id).order("created_at DESC")
+    @average_rating = @reviews.average(:rating).round(2)
   end
 
   # GET /profiles/new
@@ -38,18 +71,6 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
-
-    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-    token = params[:stripeToken]
-
-    stripe_account = Stripe::Account.create( 
-      :managed => true, 
-      :country => 'US', 
-      :email => current_user.email,
-      :bank_account => token, 
-      ) 
-
-    current_user.stripe_account = stripe_account.id
 
     # Store friendly profile URI
     current_user.profile_uri = getUniqueURI(current_user) 

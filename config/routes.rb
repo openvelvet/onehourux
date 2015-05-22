@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  
+
+  post '/rate' => 'rater#create', :as => 'rate'
   get "/messages" => redirect("/conversations")
   resources :messages do
   member do
@@ -28,6 +31,7 @@ end
   
   resources :profiles do
     resources :orders 
+    resources :reviews
   end
 
   post '/complete_purchase/:id' => "orders#complete_purchase", as: :complete_purchase
@@ -37,6 +41,8 @@ end
 
   # profiles controller
   get 'complete_profile' => "profiles#complete_profile" #show of /profiles/:id
+  get 'bank_account/:id' => "profiles#bank_account", as: :bank_account
+  post 'update_bank_account/:id' => "profiles#update_bank_account", as: :update_bank_account
   
   # routes for pages controller
   get 'pages/about'

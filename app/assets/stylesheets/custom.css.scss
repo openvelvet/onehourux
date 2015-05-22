@@ -6939,16 +6939,36 @@ html.bg {
   font-size: 28px;
 }
 
-#profile h4 {
+#profile h1 h2 h3 h4 h5 {
   color: #555;
+  font-family: Lato;
+}
+
+#profile h1 {
+  margin-top: 0px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+#profile h3 {
+  margin-top: 0px;
+  font-size: 20px;
   font-weight: 300;
-  font-size: 22px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+#profile h4 {
+  font-size: 18px;
+  font-weight: 200;
+  color: blue;
 }
 
 #profile h5 {
-  color: #555;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 17px;
+  margin-top: 5px;
+  margin-bottom: 7px;
 }
 
 #profile p {
@@ -6966,4 +6986,6 @@ html.bg {
 #edit-profile {
   margin-top: 50px;
 }
+
+
 
