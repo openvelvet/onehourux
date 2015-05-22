@@ -48,7 +48,7 @@ class ProfilesController < ApplicationController
   def show
     @user = @profile.user.id 
     @reviews = Review.where(:profile_id => @profile.id).order("created_at DESC")
-    @average_rating = @reviews.average(:rating).round(2)
+    @average_rating = @reviews.average(:rating)
   end
 
   # GET /profiles/new
