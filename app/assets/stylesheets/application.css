@@ -16,6 +16,7 @@
  *= require "profiles.scss"
  *= require "detail_admin_theme/icons.css.scss"
  *= require font-awesome
+ *= require rails_bootstrap_forms
  *= require bootstrap-social
  */
 

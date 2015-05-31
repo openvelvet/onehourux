@@ -133,7 +133,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:years_of_experience, :experience_level, :price, :portfolio_link, :linked_link, :location, :company, :title, :summary)
+      params.require(:profile).permit(:image, :years_of_experience, :experience_level, :price, :portfolio_link, :linked_link, :location, :company, :title, :summary)
     end
 
     def getUniqueURI(user)

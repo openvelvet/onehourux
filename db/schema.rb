@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521155560) do
+ActiveRecord::Schema.define(version: 20150531173311) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150521155560) do
     t.string   "address"
     t.string   "city"
     t.string   "state"
-    t.string   "zipe_code"
+    t.string   "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "profile_id"
@@ -97,14 +97,6 @@ ActiveRecord::Schema.define(version: 20150521155560) do
     t.datetime "updated_at"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "price"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.string   "years_of_experience"
     t.string   "experience_level"
@@ -119,6 +111,10 @@ ActiveRecord::Schema.define(version: 20150521155560) do
     t.string   "location"
     t.string   "linked_link"
     t.text     "summary"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "rates", force: :cascade do |t|
@@ -189,17 +185,10 @@ ActiveRecord::Schema.define(version: 20150521155560) do
     t.string   "location"
     t.string   "summary"
     t.string   "linkedin_url"
-    t.string   "image"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
     t.string   "linkedin_photo_url"
     t.string   "profile_uri"
     t.string   "linkedin_position"
     t.string   "stripe_account"
-    t.string   "charge_id"
-    t.string   "amount"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

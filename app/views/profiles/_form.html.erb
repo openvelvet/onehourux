@@ -1,4 +1,4 @@
-<%= form_for(@profile) do |f| %>
+<%= bootstrap_form_for([@profile]) do |f| %>
   <% if @profile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
@@ -11,50 +11,57 @@
     </div>
   <% end %>
 
-  <% if current_user.headline.nil? %>
+  <% if current_user.provider != "linkedin" %>
     <div class="form-group">
-      <%= f.label :title, "Current Title" %>
-      <%= f.text_field :title, placeholder: "Enter title", class: "form-control", autofocus: true %>
+      <%= f.file_field :image %>
     </div>
     <div class="form-group">
-      <%= f.label :company, "Employer" %>
-      <%= f.text_field :company, placeholder: "Enter company", class: "form-control", autofocus: true %>
+      <%= f.text_field :title, placeholder: "User Experience Designer", class: "form-control", autofocus: true, label: "What is your current title?" %>
     </div>
     <div class="form-group">
-      <%= f.label :location, "Location" %>
-      <%= f.text_field :location, placeholder: "Enter location", class: "form-control", autofocus: true %>
+      <%= f.text_field :company, placeholder: "Enter company", class: "form-control", label: "What company do you currently work at?" %>
     </div>
     <div class="form-group">
-      <%= f.label :image, "image" %>
-      <%= f.file_field :image, placeholder: "Enter image", class: "form-control", autofocus: true %>
+      <%= f.text_area :summary, placeholder: "Enter your professional summary", class: "form-control", label: "Tell us about yourself" %>
     </div>
     <div class="form-group">
-      <%= f.label :linked_link, "Employer" %>
-      <%= f.text_field :linked_link, placeholder: "Enter LinkedIn profile link", class: "form-control", autofocus: true %>
+      <%= f.text_field :location, placeholder: "Enter location", class: "form-control", label: "What city do you live in?" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :linked_link, placeholder: "Enter LinkedIn profile link", class: "form-control", label: "What is the link to your LinkedIn profile?" %>
     </div>
   <% end %>
-  <div class="form-group">
-    <%= f.label :portfolio_link, "Link to Portfolio" %>
-    <%= f.text_field :portfolio_link, placeholder: "Enter url to portfolio", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :experience_level %>
-    <%= f.select(:experience_level, ["Entry Level", "Mid-Level", "Senior-Level", "C-Level"], { prompt: "Select Your Experience Level" }, { class: "form-control" }) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :years_of_experience, "Years of Experience" %>
-    <%= f.text_field :years_of_experience, placeholder: "Enter number of years", class: "form-control", autofocus: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :price, "Hourly Rate in USD" %>
-    <%= f.number_field :price, class: "form-control", placeholder: "Enter dollar amount" %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.text_field :portfolio_link, prepend: "www.", placeholder: "exampleportfolio.com", class: "form-control", label: "What is the link to your portfolio" %>
+      </div>
+    </div>
   </div>
   
-  
-
-  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.select(:experience_level, ["Entry Level", "Mid-Level", "Senior-Level", "C-Level"], { label: "Experience Level" }, { class: "form-control" }) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.select(:years_of_experience, ["0 - 1 year", "1 - 3 years", "3 - 5 years", "5 - 10 years", "10+ years"], { label: "Years of Experience" }, { class: "form-control" }) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.number_field :price, prepend: "$", append: "/hour", label: "Hourly Rate", class: "form-control", placeholder: "100" %>
+      </div>
+    </div>
+  </div>
+  <br>
   <div class="form-group">
     <%= f.submit " Submit ", class: "button button-small" %>
   </div>
-  
 <% end %>

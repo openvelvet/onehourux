@@ -10,7 +10,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'Omar @ OneHourUX <omar@onehourux.com>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -258,7 +258,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   #Replace example.com with your own domain name
-  config.mailer_sender = 'mailer@example.com'
+  config.mailer_sender = 'Customer Service @ OneHourUX <customer_service@onehourux.com>'
 
   require 'devise/orm/active_record'
   config.case_insensitive_keys = [ :email ]
@@ -275,5 +275,5 @@ Devise.setup do |config|
   #ID first, secret second
   config.omniauth :linkedin, ENV["LINKEDIN_KEY_ID"], ENV["LINKEDIN_ACCESS_KEY"],
                   :scope => 'r_basicprofile r_emailaddress',
-                  :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "num-connections", "summary", "three-current-positions", "languages"]
+                  :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections", "num-connections", "summary", "three-current-positions", "positions"]
 end

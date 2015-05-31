@@ -23,6 +23,8 @@ gem 'mailboxer'
 gem 'autoprefixer-rails'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass', '3.3.0.0'
+gem 'mandrill-api', require: "mandrill"
+gem 'bootstrap_form'
 
 group :development, :test do
   gem 'sqlite3'

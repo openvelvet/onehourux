@@ -28,7 +28,10 @@ end
   devise_scope :user do
     get "/login" => "devise/sessions#new"
   end
-  
+
+  get "additional_fields/:id" => "users#additional_fields", as: :additional_fields
+
+
   resources :profiles do
     resources :orders 
     resources :reviews
@@ -49,6 +52,8 @@ end
   get 'pages/contact'
   get 'home' => "pages/home"
   get 'pages/type'
+
+
 
   # Home page
   root 'pages#home'

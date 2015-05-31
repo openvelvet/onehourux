@@ -1,107 +1,198 @@
-  <div class="content">
-      <div id="pad-wrapper" class="user-profile">
-        <!-- header -->
-        <div class="row header">
-            <div class="col-md-8">
+<div class="row  margin-top-20"> <!-- open main row -->
+    <div class="col-xs-12 col-sm-8 col-md-8"> <!-- right side of page -->
+        <div class="row">
+            <div class="col-sm-3 col-lg-2">
                 <% if @profile.user.linkedin_photo_url.present? %>
-                    <%= image_tag(@profile.user.linkedin_photo_url, class: "avatar img-circle", size: "80x80") %>
+                    <%= image_tag(@profile.user.linkedin_photo_url, size: "125x125", class: "img-responsive img-circle") %>
                 <% else %>
-                    <%= image_tag(@profile.user.image.url, class: "avatar img-circle", size: "100x100") %>
+                    <%= image_tag(@profile.user.image.url, size: "125x125", class: "img-responsive img-circle") %>
                 <% end %>
-                <h3 class="name"><%=  "#{@profile.user.first_name} #{@profile.user.last_name}" %></h3>
-                <h4 class="area"><%= @profile.user.headline %></h4><br>
-                <span class="area"><%= @profile.user.location %> |</span>  
-                <span class="area">LinkedIn Connections: <%= @profile.user.connections %> |</span>
-                <span class="area"><%= @profile.user.industry %></span>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <%= link_to "Hire Me Now", new_profile_order_path(@profile), class: "button pull-right", data: { no_turbolink: true } %>
+            </div> <!-- close left side of left side -->
+            <div class="col-xs-12 col-sm-9 col-lg-10">
+                <div id="profile-style">
+                    <h1><%= "#{@profile.user.first_name} #{@profile.user.last_name}" %></h1>
+                    <h3><%= @profile.user.headline %></h3>
+                    <h5>Portfolio: <%= link_to "www.#{@profile.portfolio_link}", @profile.portfolio_link %></h5>
+                    <h5>LinkedIn: <%= link_to "#{@profile.user.linkedin_url}", @profile.user.linkedin_url %></h5>
                 </div>
-                <div class="row">
-                    <%= link_to "Send me a message", new_message_path(:user => @user), class: "btn btn-link pull-right" %>
-                </div>
-                <div class="row">
-                    <h2 class="name pull-right"><%= number_to_currency(@profile.price) %></h2>
-                </div>
-                <div class="row">
-                    <p class="pull-right">Per Hour</p>
-                </div>
-            </div>
 
-           
-            
+                <div class="form-inline">
+                    <div class="form-group">
+                        <p><span class="skills">Marketing<a href=""></a></span></p>
+                    </div>
+                    <div class="form-group">
+                        <p><span class="skills">Digital Marketing</span></p>
+                    </div>
+                    <div class="form-group">
+                        <p><span class="skills">Consumer Products</span></p>
+                    </div>
+                    <div class="form-group">
+                        <p><span class="skills">Healthcare</span></p>
+                    </div>
+                </div>          
+            </div> <!-- close right side of left side -->
+        </div> <!-- close row --><br>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <h3>Professional Summary</h3>
+                    <p><%= @profile.user.summary %></p>
+                </div>
+            </div>
+        </div> <!-- close row --><br>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-11">
+                <h3>Experience By Industry:</h3>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <span class="industry">Marketing</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Digital Marketing</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Consumer Products</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Healthcare</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Marketing</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Digital Marketing</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Consumer Products</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Healthcare</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Marketing</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Digital Marketing</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Consumer Products</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="industry">Healthcare</span>
+                    </div>
+                </div>                  
+            </div>
+        </div> <!-- close row --><br>
+
+        <section id="past-companies">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Past Companies:</h3>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <span class="skills">Digital Marketing</span>
+                            </div>
+                            <div class="form-group">
+                                <span class="skills">Consumer Products</span>
+                            </div>
+                            <div class="form-group">
+                                <span class="skills">Healthcare</span>
+                            </div>
+                            <div class="form-group">
+                                <span class="skills">Marketing</span>
+                            </div>
+                        </div>                  
+                </div>
+            </div> <!-- close row -->
+        </section> <!-- close past-companies --><br>
+
+        <div id="device-experience">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Device Experience:</h3>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <span class="industry">Digital Marketing</span>
+                            </div>
+                            <div class="form-group">
+                                <span class="industry">Consumer Products</span>
+                            </div>
+                            <div class="form-group">
+                                <span class="industry">Healthcare</span>
+                            </div>
+                            <div class="form-group">
+                                <span class="industry">Marketing</span>
+                            </div>
+                        </div>                  
+                </div>
+            </div> <!-- close row -->
+        </div> <!-- close device-experience --><br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Reviews & Feedback:</h3>
+            </div>
+        </div> <!-- close row -->
+        <div class="row">
+            <% @reviews.each do |review| %>
+                <div class="col-sm-8">                            
+                    <div class="form-group">
+                        <h4><%= review.title %></h4>
+                    </div>
+                    <div class="form-group">
+                        <p><%= review.comment %></p>
+                    </div> 
+                </div> <!-- close sm-8 -->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <p><%= review.created_at.strftime("%B %d, %Y") %></p>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <p><%= review.rating %>.00/5.00</p>
+                        </div>
+                        <div class="form-group">
+                            <div class="star-rating" data-score= <%= review.rating %> ></div>
+                        </div>
+                    </div>
+                </div>
+            <% end %> <!-- close reviews -->
+        </div> <!-- close row -->
+        
+    </div> <!-- close right side of page-->
+
+
+    <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-1"> <!-- left side of page -->
+        <div class="center">
+            <%= link_to "Hire Me Now", new_profile_order_path(@profile), class: "button", data: { no_turbolink: true } %>
+            <h5>or</h5>
+            <%= link_to "Send me a message", new_message_path(:user => @user) %>
         </div><br>
-
-        <div class="row profile">
+        <hr style="height:4px;border:none;color:#555;background-color:#555;" />
+        <h5><%= number_to_currency(@profile.price) %>/hour</h5>
+        <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+        <h5>
             <div class="form-inline">
                 <div class="form-group">
-                    <%= "#{@average_rating}/5.00" %>
+                    <h5><%= "#{@average_rating}/5.00" %></h5>
                 </div>
                 <div class="form-group">
                     <div class="star-rating" data-score= <%= @average_rating %> ></div>
                 </div>
             </div>
+        </h5>
+        <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+        <h5><%= "#{@reviews.length} Reviews" %></h5>
+        <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+        <h5>English, German, Farsi</h5>
+        <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+        <h5><%= @profile.user.location %></h5>
+        <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+    </div> <!-- close left side  -->
 
-            <%= "#{@reviews.length} Reviews" %>
-            
-            <!-- bio, new note & orders column -->
-            <div class="col-md-9 bio">
-                <div class="profile-box">
-                    <!-- biography -->
-                    <div class="col-md-12 section">
-                        <h6>Professional Summary</h6>
-                        <p><%= @profile.user.summary %></p>
-                    </div>
-
-                    <h6>Reviews</h6>
-
-                   <% @reviews.each do |review| %>
-                        <div class="star-rating" data-score= <%= review.rating %> ></div>
-                        <p><%= review.title %></p>
-                        <p><%= review.comment %></p>
-                        <p><%= review.created_at.strftime("%m/%d/%Y") %></p>
-                   <% end %>
-
-                   
-
-                    <!-- new comment form -->
-                    <div class="col-md-12 section comment">
-                        <h6>Add a quick note</h6>
-                        <p>Add a note about this user to keep a history of your interactions.</p>
-                        <textarea></textarea>
-                        <a href="#">Attach files</a>
-                        <div class="col-md-12 submit-box pull-right">
-                            <input type="submit" class="button button-small" value="Add Note">
-                            <span>OR</span>
-                            <input type="reset" value="Cancel" class="btn btn-link">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- side address column -->
-            <!-- <div class="col-md-3 col-xs-12 address pull-right">
-                <h6>Location</h6>
-                <iframe width="300" height="133" scrolling="no" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
-                <ul>
-                    <li>2301 East Lamar Blvd. Suite 140. </li>
-                    <li>City, Arlington. United States,</li>
-                    <li>Zip Code, TX 76006.</li>
-                    <li class="ico-li">
-                        <i class="ico-phone"></i>
-                        1817 274 2933
-                    </li>
-                     <li class="ico-li">
-                        <i class="ico-mail"></i>
-                        <a href="#">alejandra@detail.com</a>
-                    </li>
-                </ul>
-            </div> -->
-        </div>
-    </div>
-</div>
-<!-- end main container -->
+</div> <!-- close main row -->
 
 <script>
   $('.star-rating').raty({
@@ -112,3 +203,5 @@
     }
   });
 </script>
+
+

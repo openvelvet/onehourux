@@ -9,7 +9,7 @@
       </h1>
       <div class="cta animated fadeInDown">
         <%= link_to "Find a UX Designer", profiles_path, class: "button btn-lg" %>
-        <!-- <a href="features.html" class="button-outline">How it works</a> -->
+        <%= link_to "Join as a UX Designer", new_user_registration_path, class: "button-outline" %>
       </div>
 <!--       <div class="cta animated fadeInDown">
         <a href="features.html" class="button-outline">How it works</a>
@@ -17,7 +17,43 @@
     </div>
   </div>
 
-  <div id="features">
+  <div id="second-option">
+    <div class="container">
+      <div class="row center">
+        <h2 class="global-h2">How it works</h2>
+      </div>
+      <div class="row center">
+        <div class="col-md-4 feature">
+          <%= image_tag "icons/circle-icons/full-color/compass.png" %>
+          <div id="profile-style">
+            <h4>Find</h4>
+          </div>
+          <p>With some customization you can make this product apply to your branding guidelines and amaze your customers at the same time.</p>
+        </div>
+        <div class="col-md-4 feature">
+          <%= image_tag "icons/circle-icons/full-color/money.png" %>
+          <div id="profile-style">
+            <h4>Hire</h4>
+          </div>
+          <p>With some customization you can make this product apply to your branding guidelines and amaze your customers at the same time.</p>
+        </div>
+        <div class="col-md-4 feature">
+          <%= image_tag "icons/circle-icons/full-color/profle.png" %>
+          <div id="profile-style">
+            <h4>Meet</h4>
+          </div>
+          <p>We don't impose any design restrictions, you are free to customize it as you see fit and it's easy to use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="global-divider"></div>
+  </div>
+
+  
+
+  <!-- <div id="features">
     <div class="container">
       <div class="row header">
         <div class="col-md-12">
@@ -36,7 +72,7 @@
           <%= image_tag("feature1.png", class: "img-responsive") %>
         </div>
       </div>
-      <div class="divider"></div>
+      <div class="global-divider"></div>
       <div class="row feature backwards">
         <div class="col-md-6 info">
           <h4>A fully featured well design template that works.</h4>
@@ -54,7 +90,7 @@
         </div>
       </div>
     </div>    
-  </div>
+  </div> -->
 
 <!--   <div id="pricing">
     <div class="container">
@@ -175,7 +211,7 @@
     </div>
   </div> -->
 
-  <div id="slider">
+  <!-- <div id="slider">
     <div class="container">
       <div class="row header">
         <div class="col-md-12">
@@ -206,9 +242,9 @@
         </div>  
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div id="testimonials">
+  <!-- <div id="testimonials">
     <div class="container">
       <div class="row header">
         <div class="col-md-12">
@@ -251,13 +287,13 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div id="cta">
-    <a href="signup.html">
-      Get Feedback & Help Now
-    </a>
+    <button class="button btn-xl">Find a UX Designer</button>
   </div>
+
+
 
   <div id="clients">
     <div class="container">

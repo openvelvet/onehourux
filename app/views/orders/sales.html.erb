@@ -17,7 +17,7 @@
       <td class="center"><%= number_to_currency(order.profile.price) %></td>
       <td class="center"><%= order.buyer.first_name %></td>
       <td class="center"><%= order.created_at.strftime("%B %-d, %Y") %></td>
-      <td class="center"><%= button_to "complete order", complete_purchase_path(order.id) %></td>
+      <td class="center"><%= button_to "complete order", complete_purchase_path(order.id), class: "button button-small" %></td>
     </tr>
   <% end %>
 </table>

@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
   has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
   has_many :reviews, dependent: :destroy
 
+  after_create :send_notification
 
-  has_attached_file :image, :styles => { :medium => "300x>", :thumb => "100x100>" }, :default_url => "default.jpg"
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  def send_notification
+    MyMailer.new_user(self).deliver_now
+  end
 
   validates :email, uniqueness: true
 
@@ -40,7 +42,7 @@ class User < ActiveRecord::Base
         user.connections = auth.extra.raw_info.numConnections
         user.linkedin_photo_url = auth.info.image
         user.linkedin_url = auth.info.urls.public_profile
-        user.linkedin_position = auth.extra.raw_info.languages
+        user.linkedin_position = auth.extra.raw_info.positions.values
       end
   end
 end

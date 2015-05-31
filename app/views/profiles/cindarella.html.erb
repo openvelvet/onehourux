@@ -1,1 +1,212 @@
-<h1>Hello World</h1>
+<div class="row  margin-top-20"> <!-- open main row -->
+    <div class="col-xs-12 col-sm-8 col-md-9"> <!-- right side of page -->
+        <div class="row">
+            <div id="profile-style">
+                <div class="col-sm-3">
+                    <%= image_tag "default.jpg", size: "150x150", class: "img-responsive img-circle" %>
+                </div> <!-- close left side of left side -->
+                <div class="col-xs-12 col-sm-9">
+                    <h1><%= "#{@profile.user.first_name} #{@profile.user.last_name}" %></h1>
+                    <h3><%= @profile.user.headline %></h3>
+                    <h5>Portfolio: <%= link_to "www.#{@profile.portfolio_link}", @profile.portfolio_link %></h5>
+                    <h5>LinkedIn: <%= link_to "#{@profile.user.linkedin_url}", @profile.user.linkedin_url %></h5>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <p><span class="label label-default">Marketing<a href=""></a></span></p>
+                        </div>
+                        <div class="form-group">
+                            <p><span class="label label-default">Digital Marketing</span></p>
+                        </div>
+                        <div class="form-group">
+                            <p><span class="label label-default">Consumer Products</span></p>
+                        </div>
+                        <div class="form-group">
+                            <p><span class="label label-default">Healthcare</span></p>
+                        </div>
+                    </div>          
+                </div> <!-- close right side of left side -->
+            </div> <!-- close profile-style -->
+        </div> <!-- close row --><br>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <h3>Professional Summary</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+                </div>
+            </div>
+        </div> <!-- close row --><br>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-11">
+                <h3>Experience By Industry:</h3>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <h5><span class="label label-default">Marketing</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Digital Marketing</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Consumer Products</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Healthcare</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Marketing</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Digital Marketing</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Consumer Products</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Healthcare</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Marketing</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Digital Marketing</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Consumer Products</span></h5>
+                    </div>
+                    <div class="form-group">
+                        <h5><span class="label label-default">Healthcare</span></h5>
+                    </div>
+                </div>                  
+            </div>
+        </div> <!-- close row --><br>
+
+        <section id="past-companies">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Past Companies:</h3>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <h5><span class="label label-default">Digital Marketing</span></h5>
+                            </div>
+                            <div class="form-group">
+                                <h5><span class="label label-default">Consumer Products</span></h5>
+                            </div>
+                            <div class="form-group">
+                                <h5><span class="label label-default">Healthcare</span></h5>
+                            </div>
+                            <div class="form-group">
+                                <h5><span class="label label-default">Marketing</span></h5>
+                            </div>
+                        </div>                  
+                </div>
+            </div> <!-- close row -->
+        </section> <!-- close past-companies --><br>
+
+        <div id="device-experience">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Device Experience:</h3>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <h5><span class="label label-default">Digital Marketing</span></h5>
+                            </div>
+                            <div class="form-group">
+                                <h5><span class="label label-default">Consumer Products</span></h5>
+                            </div>
+                            <div class="form-group">
+                                <h5><span class="label label-default">Healthcare</span></h5>
+                            </div>
+                            <div class="form-group">
+                                <h5><span class="label label-default">Marketing</span></h5>
+                            </div>
+                        </div>                  
+                </div>
+            </div> <!-- close row -->
+        </div> <!-- close device-experience --><br>
+
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Reviews & Feedback:</h3>
+            </div>
+            <div id="profile-style">
+                <div class="col-sm-8">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <h4>Super Awesome Advice</h4>
+                        </div>
+                        <div class="form-group">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+                        </div> 
+                    </div> <!-- close inline-form            -->
+                </div> <!-- close sm-8 -->
+                <div class="col-sm-4">
+                    <h5>May 2015</h5>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <h5>4.94/5.00 </h5>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- close row -->
+    </div> <!-- close right side of page-->
+
+
+    <div class="col-xs-12 col-sm-4 col-md-3"> <!-- left side of page -->
+        <div class="center">
+            <%= link_to "Hire Me Now", new_profile_order_path(@profile), class: "button", data: { no_turbolink: true } %>
+            <h5>or</h5>
+            <%= link_to "Send me a message", new_message_path(:user => @user), class: "btn btn-link" %>
+        </div>
+            <hr style="height:4px;border:none;color:#555;background-color:#555;" />
+            <h5><%= number_to_currency(@profile.price) %></h5>
+            <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+            <h5><div class="form-inline">
+                        <div class="form-group">
+                            <h5>4.94/5.00</h5>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </div>
+                    </div></h5>
+            <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+            <h5>28 Times Hired</h5>
+            <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+            <h5>English, German, Farsi</h5>
+            <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+            <h5>Los Angeles, California</h5>
+            <hr style="height:1px;border:none;color:#555;background-color:#555;" />
+        </div>
+    </div> <!-- close left side  -->
+</div> <!-- close main row -->
+
+
