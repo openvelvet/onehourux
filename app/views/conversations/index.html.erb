@@ -1,55 +1,75 @@
-<br \> <br \>
-<div class="container">
-  <div class="well">
-    <div class="title">
-      <h1>Conversations</h1></div>
-        Click on the subject to open the conversation. You can click on the <i class="fa fa-trash fa-2x"></i> icon to send a conversation to the trash folder. You can begin a new conversation by clicking on the "Send Message" button on a person's profile page.
-      <p><h2> <a href="<%= conversations_path %>"> <%= @conversationscount.count %> Inbox </a> | <a href="<%= trashbin_conversations_path %>"> <%= @trash.count %> Trash </a> </h2></p>
-    <br>
-    <h3> Inbox </h3>
-    <br \>
-  <table width="900" border="0" cellspacing="0" cellpadding="0" style="background-color:#9FC; border-radius:10px;" align="center">
-  <tr>
-    <th scope="col" class="emailTH">SENDER</th>
-    <th scope="col" class="emailTH">SUBJECT</th>
-    <th scope="col" class="emailTH">DATE</th>
-    <th scope="col" class="emailTH"></th>
-  </tr>
-  <% if @conversations == nil || @conversations.empty? %>
-    <i>Your Inbox folder is currently empty</i>
-    <%end%>
-  <% @conversations.each do |conversation| %>
-  <tr>
-    <td class="emailsenderTD">
-    <% conversation.participants.each do |participant| %>
-      <% if participant != current_user %>
-          <% if conversation.is_read?(current_user) %> <%= participant.first_name %>
-             <% else %> 
-             <b> <%= participant.first_name %> </b> 
-          <% end %> 
+<h1>Messages</h1>
+<br>
+<div class="row">
+  <div class="col-sm-4 col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class="active">
+        <%= link_to conversations_path do %>
+          Inbox <span class="label label-danger pull-right"><%= @conversations.count %></span>
         <% end %>
+      </li>
+      <li role="presentation">
+        <%= link_to trashbin_conversations_path do %>
+          Trash <span class="label label-danger pull-right"><%= @trash.count %></span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-8 col-md-8 col-md-offset-1">
+    <% if @conversations == nil || @conversations.empty? %>
+      <i>Your Inbox folder is currently empty</i>
+    <% else %>
+      <% @conversations.each do |conversation| %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left">
+                <!-- user avators can go here -->
+                <a href="#">
+                  <img class="media-object" src="http://placehold.it/64x64" alt="...">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <% conversation.participants.each do |participant| %>
+                    <% if participant != current_user %>
+                        <% if conversation.is_read?(current_user) %> 
+                          <%= participant.first_name %>
+                        <% else %> 
+                           <%= participant.first_name %>
+                        <% end %> 
+                    <% end %>
+                  <% end %> <br>
+                  <small>
+                    <b>Subject: </b>
+                      <% if conversation.is_read?(current_user) %> 
+                        <%= link_to conversation.subject, conversation_path(conversation) %>
+                      <% else %>
+                        <%= link_to conversation.subject, conversation_path(conversation) %>
+                      <% end %>
+                  </small><br>
+                  <small>
+                    <b>Date: </b>
+                      <% if conversation.is_read?(current_user) %> 
+                        <%= conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p") %>
+                      <% else %> 
+                        <%= conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p") %>
+                      <% end %>
+                      <%= link_to '<i class="fa fa-trash"> delete</i>'.html_safe, {:controller => "conversations", :action => "trash", :id => conversation.id}, :title=> "Move to Trash", :method=>'post', class: "button-danger pull-right" %>
+                  </small>
+                </h4>
+                <% if conversation.is_read?(current_user) %> 
+                  <%= conversation.subject %>
+                <% else %>
+                  <%= conversation.messages %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <% end %>
-    </td>
-    <td class="emailsubjectTD"> 
-       <% if conversation.is_read?(current_user) %> 
-        <%= link_to conversation.subject, conversation_path(conversation) %> </td>
-        <% else %>
-        <b><%= link_to conversation.subject, conversation_path(conversation) %></b> </td>
-       <% end %>
-    <td class="emailTD">
-      <% if conversation.is_read?(current_user) %> <%= conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p") %></td>  
-      <% else %> 
-      <b> <%= conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p") %> </b> 
-      </td> 
-      <% end %>
-    <td class="emailtrashTD">
-      <%= link_to '<i class="fa fa-trash fa-2x"></i>'.html_safe, {:controller => "conversations", :action => "trash", :id => conversation.id}, :title=> "Move to Trash", :method=>'post' %> &nbsp; &nbsp;
-    </td>
-  </tr>
-   <% end %>
-</table>
-  </span>
-  <%= will_paginate @conversations %>
+    <%end%>    
+  </div>
 </div>
-</div>
-</div>
+

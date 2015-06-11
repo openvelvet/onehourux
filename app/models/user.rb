@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:linkedin]
 
   has_one :profile, dependent: :destroy
-  has_one :recruiter, dependent: :destroy
   has_many :sales, class_name: "Order", foreign_key: "seller_id"
   has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
   has_many :reviews, dependent: :destroy
@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
     MyMailer.new_user(self).deliver_now
   end
 
+  validates :first_name, :last_name,  presence: true
   validates :email, uniqueness: true
 
   acts_as_messageable
@@ -42,7 +43,8 @@ class User < ActiveRecord::Base
         user.connections = auth.extra.raw_info.numConnections
         user.linkedin_photo_url = auth.info.image
         user.linkedin_url = auth.info.urls.public_profile
-        user.linkedin_position = auth.extra.raw_info.positions.values
+        user.linkedin_position = auth.extra.raw_info.positions.values[1]
       end
   end
 end
+

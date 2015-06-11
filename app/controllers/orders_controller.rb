@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
         :amount => (@order.amount * 0.8572).floor,
         :currency => "usd",
         :destination => current_user.stripe_account,
-        :description => "MY FRRIIIEENNDD",
+        :description => "Payment from #{@order.buyer_id}",
         :source_transaction => @order.charge_id
       )
       redirect_to root_path
@@ -131,6 +131,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:address, :city, :state, :zipe_code)
+      params.require(:order).permit(:address, :city, :state, :zip_code)
     end
 end

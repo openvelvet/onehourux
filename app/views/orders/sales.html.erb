@@ -1,23 +1,28 @@
 <div class="center">
   <h2>Your Sales History</h2>
-</div>
+</div><br>
 
-<table class="table table-striped table-bordered">
-  <tr>
-    <th class="center">My Name</th>
-    <th class="center">Price</th>
-    <th class="center">Buyer Name</th>
-    <th class="center">Date</th>
-    <th class="center">Action</th>
-  </tr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="center">Buyer Name</th>
+      <th class="center">Price</th>
+      <th class="center">Order Date</th>
+      <th class="center">Order Number</th>
+      <th class="center">Action</th>
+    </tr>
+  </thead>
 
   <% @orders.each do |order| %>
-    <tr>
-      <td class="center"><%= order.profile.user.first_name %></td>
-      <td class="center"><%= number_to_currency(order.profile.price) %></td>
-      <td class="center"><%= order.buyer.first_name %></td>
-      <td class="center"><%= order.created_at.strftime("%B %-d, %Y") %></td>
-      <td class="center"><%= button_to "complete order", complete_purchase_path(order.id), class: "button button-small" %></td>
-    </tr>
+    <tbody>
+      <tr>
+        <td class="center"><%= "#{order.buyer.first_name} #{order.buyer.last_name}" %></td>
+        <td class="center"><%= number_to_currency(order.profile.price) %></td>
+        <td class="center"><%= order.created_at.strftime("%B %-d, %Y") %></td>
+        <td class="center"><%= order.id %></td>
+        <td class="center"><%= button_to "Mark as completed", complete_purchase_path(order.id), class: "button button-xs" %></td>
+      </tr>
+    </tbody>
   <% end %>
 </table>

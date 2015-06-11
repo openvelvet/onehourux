@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531173311) do
+ActiveRecord::Schema.define(version: 20150601063627) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(version: 20150531173311) do
     t.datetime "updated_at"
   end
 
+  create_table "profile_skills", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profile_skills", ["profile_id"], name: "index_profile_skills_on_profile_id"
+  add_index "profile_skills", ["skill_id"], name: "index_profile_skills_on_skill_id"
+
   create_table "profiles", force: :cascade do |t|
     t.string   "years_of_experience"
     t.string   "experience_level"
@@ -142,16 +152,6 @@ ActiveRecord::Schema.define(version: 20150531173311) do
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
-  create_table "recruiters", force: :cascade do |t|
-    t.string   "company_name"
-    t.string   "company_location"
-    t.string   "phone_number"
-    t.string   "title"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "user_id"
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
     t.string   "title"
@@ -161,6 +161,35 @@ ActiveRecord::Schema.define(version: 20150531173311) do
     t.integer  "profile_id"
     t.integer  "user_id"
   end
+
+  create_table "skills", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "skills", ["profile_id"], name: "index_skills_on_profile_id"
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

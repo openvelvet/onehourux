@@ -29,6 +29,8 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @conversations ||= @mailbox.inbox.page(params[:page]).per_page(25)
+    @trash ||= current_user.mailbox.trash.all
     @conversation ||= @mailbox.conversations.find(params[:id])
     conversation.mark_as_read(current_user)
   end

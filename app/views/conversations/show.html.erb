@@ -1,37 +1,42 @@
-<br \><br \>
-<div class="container">
-  <div class="well">
-    <h1>
-      <%= @conversation.subject %>
-    </h1>
-    <h2>
-      <span>A conversation with</span>
-      <% @conversation.participants.each do |participant| %>
-        <% if participant != current_user %>
-          <%= participant.first_name  %>
+<h1>Messages</h1>
+<br>
+<div class="row">
+  <div class="col-sm-4 col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class="active">
+        <%= link_to conversations_path do %>
+          Inbox <span class="label label-danger pull-right"><%= @conversations.count %></span>
         <% end %>
-      <% end %>
-    </h2>
-    <br/>
-    <ul>
-      <%= content_tag_for(:li, @conversation.receipts_for(current_user)) do |receipt| %>
-        <% message = receipt.message %>
-        <br/>
-        <b>
-          <%= message.sender.first_name %>
-        </b>
-        <p>
-          <%= simple_format h message.body %>
-        </p>
-        <span class="timestamp">Sent</span>
-        <span class="timestamp">
-          <%= time_ago_in_words(message.updated_at) %>
-        </span>
-        <span class="timestamp">ago.</span>
-        <br/>
-      <% end %>
-      <br/>
+      </li>
+      <li role="presentation">
+        <%= link_to trashbin_conversations_path do %>
+          Trash <span class="label label-danger pull-right"><%= @trash.count %></span>
+        <% end %>
+      </li>
     </ul>
-    <%= render 'messages/form', conversation: @conversation %>
+  </div>
+  <div class="col-sm-8 col-md-8 col-md-offset-1">
+    <div id="profile-style">
+      <h1><%= @conversation.subject %></h1>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-body">
+        
+        <%= content_tag_for(:p, @conversation.receipts_for(current_user)) do |receipt| %>
+          <div class="panel panel-default grey-background">
+            <div class="panel-body">
+              <% message = receipt.message %>
+                <h3><%= message.sender.first_name %></h3>
+                <span class="timestamp">Sent <%= time_ago_in_words(message.updated_at) %> ago</span>
+                <%= simple_format h message.body %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= render 'messages/form', conversation: @conversation %>
+      </div>
+    </div>
   </div>
 </div>
+

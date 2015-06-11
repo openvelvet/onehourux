@@ -25,6 +25,8 @@ gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass', '3.3.0.0'
 gem 'mandrill-api', require: "mandrill"
 gem 'bootstrap_form'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'searchkick'
 
 group :development, :test do
   gem 'sqlite3'

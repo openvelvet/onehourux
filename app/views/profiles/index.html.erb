@@ -2,8 +2,7 @@
 	<div class="col-md-3">
 		<div class="thumbnail">
 			<div class="caption">
-				<h4>Filters</h4>
-				<p>Hello Worl</p>
+				
 			</div> <!-- caption -->
 		</div> <!-- close thumbnail -->
 	</div> <!-- col-md-3 -->
@@ -13,24 +12,34 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="caption center">
-							<%= image_tag(profile.user.linkedin_photo_url, width: "100px", height: "100px", class: "pic") %>		
+							<% if profile.user.linkedin_photo_url.present? %>
+	                <%= image_tag(profile.user.linkedin_photo_url, size: "125x125", class: "img-responsive img-circle") %>
+	            <% else %>
+	                <%= image_tag(profile.image.url, size: "125x125", class: "img-responsive img-circle") %>
+	            <% end %>
 						</div> <!-- caption -->
 					</div> <!-- close sm-3 -->
 					<div class="col-sm-7">
 						<div class="caption">
 							
 							<h3 style="margin-top: 0px"><%= "#{profile.user.first_name} #{profile.user.last_name}" %></h3>
-							<h4 class="nice-grey"><%= profile.user.headline %> at ReachLocal</h4>
+							<h4 class="nice-grey">
+								<% if profile.user.provider == "linkedin" %>
+									<%= "#{profile.user.headline}" %> 
+								<% else %>
+									<%= "#{profile.title} at #{profile.company}" %>
+								<% end %>
+								
+							</h4>
 							<h5 class="nice-grey"><%= profile.user.location %></h5>
-							<span class="skills">Wireframing</span>
-							<span class="skills">Wireframing</span>
-							<span class="skills">Wireframing</span>
-							<span class="skills">Wireframing</span><br>
-							<span class="industry">Wireframing</span>
-							<span class="industry">Wireframing</span>
-							<span class="industry">Wireframing</span>
-							<span class="industry">Wireframing</span>
-							<p class="light-grey"><%= profile.user.summary.truncate(168) %></p>
+							<%= raw profile.tag_list.map { |t| link_to t, tag_path(t), class: "skills" }.join(" ") %>
+							<p class="light-grey">
+								<% if profile.user.provider == "linkedin" %>
+									<%= truncate(profile.user.summary, length: 210) %>
+								<% else %>
+									<%= truncate(profile.summary, length: 210) %>
+								<% end %>
+							</p>
 						</div> <!-- caption -->
 					</div> <!-- close sm-7 -->
 					<div class="col-sm-3">
@@ -39,9 +48,9 @@
 							<br><br>
 							<h3><%= number_to_currency(profile.price) %>/hour</h3>
 							<hr>
-							<p>3.50/5.00</p>
-							<hr>
-							<p>English  |  Farsi</p>
+							<p>
+								3.50/5.00
+							</p>
 						</div>
 					</div>
 				</div> <!-- row -->

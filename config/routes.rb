@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  
+  get "tags/:tag" => "profiles#index", as: :tag
 
   post '/rate' => 'rater#create', :as => 'rate'
   get "/messages" => redirect("/conversations")
@@ -21,7 +21,6 @@ resources :conversations do
  end
 end
 
-  resources :recruiters, except: [:index, :show]
 
   # devise for users
   devise_for :users, :controllers => { :sessions => "sessions", :registrations => "registrations", :omniauth_callbacks => "callbacks" }
@@ -33,6 +32,9 @@ end
 
 
   resources :profiles do
+    collection do
+      get 'search'
+    end
     resources :orders 
     resources :reviews
   end

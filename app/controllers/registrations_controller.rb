@@ -18,12 +18,6 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def after_update_path_for(resource)
-    if current_user.connections.nil?
-    	profiles_path
-    else
-    	profile_path(current_user.profile)
-    end
-  end
+
 
 end

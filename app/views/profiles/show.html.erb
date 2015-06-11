@@ -5,30 +5,27 @@
                 <% if @profile.user.linkedin_photo_url.present? %>
                     <%= image_tag(@profile.user.linkedin_photo_url, size: "125x125", class: "img-responsive img-circle") %>
                 <% else %>
-                    <%= image_tag(@profile.user.image.url, size: "125x125", class: "img-responsive img-circle") %>
+                    <%= image_tag(@profile.image.url, size: "125x125", class: "img-responsive img-circle") %>
                 <% end %>
             </div> <!-- close left side of left side -->
             <div class="col-xs-12 col-sm-9 col-lg-10">
                 <div id="profile-style">
                     <h1><%= "#{@profile.user.first_name} #{@profile.user.last_name}" %></h1>
-                    <h3><%= @profile.user.headline %></h3>
-                    <h5>Portfolio: <%= link_to "www.#{@profile.portfolio_link}", @profile.portfolio_link %></h5>
-                    <h5>LinkedIn: <%= link_to "#{@profile.user.linkedin_url}", @profile.user.linkedin_url %></h5>
+                    <% if @profile.user.provider == "linkedin" %>
+                        <h3><%= "#{@profile.user.headline} at #{@profile.company}" %></h3>
+                        <h5>LinkedIn: <%= link_to "#{@profile.user.linkedin_url}", @profile.user.linkedin_url, :target => "_blank" %></h5>
+                    <% else %>
+                        <h3><%= "#{@profile.title} at #{@profile.company}" %></h3>
+                        <h5>LinkedIn: <%= link_to "https://www.linkedin.com/#{@profile.linked_link}", "https://#{@profile.linked_link}", :target => "_blank"  %></h5>
+                    <% end %>
+                    <h5>Portfolio: <%= link_to "#{@profile.portfolio_link}", "http://#{@profile.portfolio_link}", :target => "_blank" %></h5>
+                    
                 </div>
 
                 <div class="form-inline">
-                    <div class="form-group">
-                        <p><span class="skills">Marketing<a href=""></a></span></p>
-                    </div>
-                    <div class="form-group">
-                        <p><span class="skills">Digital Marketing</span></p>
-                    </div>
-                    <div class="form-group">
-                        <p><span class="skills">Consumer Products</span></p>
-                    </div>
-                    <div class="form-group">
-                        <p><span class="skills">Healthcare</span></p>
-                    </div>
+                    <% @profile.tag_list.each do |profile| %>
+                        <span class="skills"><%= profile %></span>
+                    <% end %>
                 </div>          
             </div> <!-- close right side of left side -->
         </div> <!-- close row --><br>
@@ -37,7 +34,12 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <h3>Professional Summary</h3>
-                    <p><%= @profile.user.summary %></p>
+                    <% if @profile.user.provider == "linkedin" %>
+                        <p><%= @profile.user.summary %></p>
+                    <% else %>
+                        <p><%= @profile.summary %></p>
+                    <% end %>
+                    
                 </div>
             </div>
         </div> <!-- close row --><br>
@@ -46,43 +48,10 @@
             <div class="col-xs-12 col-sm-11">
                 <h3>Experience By Industry:</h3>
                 <div class="form-inline">
-                    <div class="form-group">
-                        <span class="industry">Marketing</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Digital Marketing</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Consumer Products</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Healthcare</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Marketing</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Digital Marketing</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Consumer Products</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Healthcare</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Marketing</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Digital Marketing</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Consumer Products</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="industry">Healthcare</span>
-                    </div>
-                </div>                  
+                    <% @profile.industry_list.each do |profile| %>
+                        <span class="skills"><%= profile %></span>
+                    <% end %>
+                </div>          
             </div>
         </div> <!-- close row --><br>
 
@@ -91,24 +60,15 @@
                 <div class="col-xs-12">
                     <h3>Past Companies:</h3>
                         <div class="form-inline">
-                            <div class="form-group">
-                                <span class="skills">Digital Marketing</span>
-                            </div>
-                            <div class="form-group">
-                                <span class="skills">Consumer Products</span>
-                            </div>
-                            <div class="form-group">
-                                <span class="skills">Healthcare</span>
-                            </div>
-                            <div class="form-group">
-                                <span class="skills">Marketing</span>
-                            </div>
-                        </div>                  
+                            <% @profile.company_list.each do |profile| %>
+                                <span class="skills"><%= profile %></span>
+                            <% end %>
+                        </div>           
                 </div>
             </div> <!-- close row -->
         </section> <!-- close past-companies --><br>
 
-        <div id="device-experience">
+        <!-- <div id="device-experience">
             <div class="row">
                 <div class="col-xs-12">
                     <h3>Device Experience:</h3>
@@ -128,7 +88,7 @@
                         </div>                  
                 </div>
             </div> <!-- close row -->
-        </div> <!-- close device-experience --><br>
+        <!-- </div>  --><!-- close device-experience --><!-- <br> -->
 
         <div class="row">
             <div class="col-md-12">
@@ -136,29 +96,35 @@
             </div>
         </div> <!-- close row -->
         <div class="row">
-            <% @reviews.each do |review| %>
-                <div class="col-sm-8">                            
-                    <div class="form-group">
-                        <h4><%= review.title %></h4>
-                    </div>
-                    <div class="form-group">
-                        <p><%= review.comment %></p>
-                    </div> 
-                </div> <!-- close sm-8 -->
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <p><%= review.created_at.strftime("%B %d, %Y") %></p>
-                    </div>
-                    <div class="form-inline">
+            <% if @average_rating.present? %>
+                <% @reviews.each do |review| %>
+                    <div class="col-sm-8">                            
                         <div class="form-group">
-                            <p><%= review.rating %>.00/5.00</p>
+                            <h4><%= review.title %></h4>
                         </div>
                         <div class="form-group">
-                            <div class="star-rating" data-score= <%= review.rating %> ></div>
+                            <p><%= review.comment %></p>
+                        </div> 
+                    </div> <!-- close sm-8 -->
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <p><%= review.created_at.strftime("%B %d, %Y") %></p>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <p><%= review.rating %>.00/5.00</p>
+                            </div>
+                            <div class="form-group">
+                                <div class="star-rating" data-score= <%= review.rating %> ></div>
+                            </div>
                         </div>
                     </div>
+                <% end %> <!-- close reviews -->
+            <% else %>
+                <div class="col-xs-12">
+                    <p><i><%= "#{@profile.user.first_name} does not have any reviews" %></i></p>
                 </div>
-            <% end %> <!-- close reviews -->
+            <% end %>
         </div> <!-- close row -->
         
     </div> <!-- close right side of page-->
@@ -171,24 +137,32 @@
             <%= link_to "Send me a message", new_message_path(:user => @user) %>
         </div><br>
         <hr style="height:4px;border:none;color:#555;background-color:#555;" />
-        <h5><%= number_to_currency(@profile.price) %>/hour</h5>
+        <h3><%= number_to_currency(@profile.price) %>/hour</h3>
         <hr style="height:1px;border:none;color:#555;background-color:#555;" />
         <h5>
-            <div class="form-inline">
-                <div class="form-group">
-                    <h5><%= "#{@average_rating}/5.00" %></h5>
+            <% if @reviews.present? %>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <h5><%= "#{@average_rating}/5.00" %></h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="star-rating" data-score= <%= @average_rating %> ></div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="star-rating" data-score= <%= @average_rating %> ></div>
-                </div>
-            </div>
+            <% else %>
+                <p><i>No Average Rating</i></p>
+            <% end %>
+            
         </h5>
         <hr style="height:1px;border:none;color:#555;background-color:#555;" />
         <h5><%= "#{@reviews.length} Reviews" %></h5>
         <hr style="height:1px;border:none;color:#555;background-color:#555;" />
-        <h5>English, German, Farsi</h5>
-        <hr style="height:1px;border:none;color:#555;background-color:#555;" />
-        <h5><%= @profile.user.location %></h5>
+        <% if @profile.user.provider == "linkedin" %>
+            <h5><%= @profile.user.location %></h5>
+        <% else %>
+            <h5><%= @profile.location %></h5>
+        <% end %>
+        
         <hr style="height:1px;border:none;color:#555;background-color:#555;" />
     </div> <!-- close left side  -->
 

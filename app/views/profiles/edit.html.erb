@@ -7,8 +7,8 @@
 	<section id="edit-profile">
 		<div class="col-md-2">
 			<div class="form-group">
-				<% if current_user.image.present? %>
-					<%= image_tag(current_user.image, class: "img-circle", width: "100px", height: "100px") %>
+				<% if current_user.profile.image.present? %>
+					<%= image_tag(current_user.profile.image, class: "img-circle", width: "100px", height: "100px") %>
 				<% else %>
 					<%= image_tag(current_user.linkedin_photo_url, class: "img-circle", width: "100px", height: "100px") %>
 				<% end %>

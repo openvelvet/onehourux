@@ -5,7 +5,14 @@ class ProfilesController < ApplicationController
   
 
   def bank_account
+  end
 
+  def search
+    if params[:search].present?
+      @profiles = Profile.search(params[:search]).facets(:title)
+    else
+      @profiles = Profile.all
+    end
   end
 
   def update_bank_account
@@ -26,7 +33,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to profile_path(@profile), notice: 'Profile was successfully created.' }
+        format.html { redirect_to sales_path(@profile), notice: 'Bank account information was successfully updated.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -40,15 +47,19 @@ class ProfilesController < ApplicationController
   end
 
   def index
-    @profiles = Profile.all
+    if params[:tag]
+      @profiles = Profile.tagged_with(params[:tag])
+    else
+      @profiles = Profile.all
+    end
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @user = @profile.user.id 
-    @reviews = Review.where(:profile_id => @profile.id).order("created_at DESC")
-    @average_rating = @reviews.average(:rating)
+      @user = @profile.user.id 
+      @reviews = Review.where(:profile_id => @profile.id).order("created_at DESC")
+      @average_rating = @reviews.average(:rating)
   end
 
   # GET /profiles/new
@@ -69,6 +80,7 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
+    params[:profile][:tag_list] = params[:profile][:tag_list]
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
 
@@ -129,11 +141,10 @@ class ProfilesController < ApplicationController
       end
     end
 
-    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:image, :years_of_experience, :experience_level, :price, :portfolio_link, :linked_link, :location, :company, :title, :summary)
+      params.require(:profile).permit(:company_list, :industry_list, :tag_list, :image, :years_of_experience, :experience_level, :price, :portfolio_link, :linked_link, :location, :company, :title, :summary)
     end
 
     def getUniqueURI(user)

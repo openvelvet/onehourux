@@ -47,6 +47,20 @@ p {
   font-weight: 300;
 }
 
+td {
+  color: #6C7279;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+}
+
+th {
+  color: #444444;
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
 label {
   color: #6C7279;
   font-size: 15px;
@@ -91,7 +105,13 @@ label {
   .button:active {
     box-shadow: inset 0px 3px 3px rgba(0, 0, 0, 0.29); }
   .button.button-small {
-    padding: 10px 1.5em;
+    padding: 12px 1.5em;
+    border: 1px solid #68A2EE;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center; }
+  .button.button-xs {
+    padding: 5px 1em;
     border: 1px solid #68A2EE;
     font-size: 14px;
     font-weight: 500;
@@ -369,7 +389,7 @@ a:focus, button:focus {
   z-index: 9999;
   -webkit-font-smoothing: antialiased; }
   .navbar.normal .navbar-header .navbar-brand {
-    color: #757b7f;
+    color: #444444;
     padding: 25px 15px;
     font-weight: 300;
     font-size: 26px; }
@@ -393,7 +413,7 @@ a:focus, button:focus {
       color: pink; }
     .navbar.normal .navbar-collapse .navbar-nav > li > a {
       padding: 25px 20px;
-      color: #757b7f;
+      color: #444444;
       font-weight: 400;
       z-index: 1001;
       -webkit-transition: color 0.2s linear;
@@ -7092,6 +7112,8 @@ html.bg {
   padding: 0px 0;
   font-weight: 300;
   font-size: 28px;
+    margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 #profile-style h3 {
@@ -7155,6 +7177,10 @@ hr {
   color: #999999;
 }
 
+.grey-background {
+  background-color: #f8f8f8;
+}
+
 
 .skills {
   background-color: #f2f2f2;
@@ -7179,6 +7205,35 @@ hr {
 #messages {
   background-color: pink;
 }
+
+.nav-tabs .glyphicon:not(.no-margin) { margin-right:10px; }
+.tab-pane .list-group-item:first-child {border-top-right-radius: 0px;border-top-left-radius: 0px;}
+.tab-pane .list-group-item:last-child {border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}
+.tab-pane .list-group .checkbox { display: inline-block;margin: 0px; }
+.tab-pane .list-group input[type="checkbox"]{ margin-top: 2px; }
+.tab-pane .list-group .glyphicon { margin-right:5px; }
+.tab-pane .list-group .glyphicon:hover { color:#FFBC00; }
+a.list-group-item.read { color: #222;background-color: #F3F3F3; }
+hr { margin-top: 5px;margin-bottom: 10px; }
+.nav-pills>li>a {padding: 5px 10px;}
+
+.ad { padding: 5px;background: #F5F5F5;color: #222;font-size: 80%;border: 1px solid #E5E5E5; }
+.ad a.title {color: #15C;text-decoration: none;font-weight: bold;font-size: 110%;}
+.ad a.url {color: #093;text-decoration: none;}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+  text-shadow: none;
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: #68A2EE; 
+  background-color: #68A2EE;
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+  background-color: #68A2EE;
+}
+
 
 
 
