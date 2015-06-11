@@ -36,6 +36,18 @@ class Profile < ActiveRecord::Base
   	}
   end
 
+  def self.facets_search(params)
+    query = params[:query].presence || "*"
+    conditions = {}
+    conditions[:first_name] = params[:first_name] if params[:first_name].present?
+
+    profiles = Profile.search query, where: conditions, 
+      facets: [:first_name], 
+      smart_facets: true, page: params[:page], suggest: true, highlight: true,
+      per_page: 10
+    profiles
+  end
+
   
 
 end

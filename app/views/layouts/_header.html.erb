@@ -9,14 +9,15 @@
       			<a href="/" class="navbar-brand">OneHourUX</a>
     		</div>
     		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      			<ul class="nav navbar-nav navbar-right">
-              <li><%= form_tag search_profiles_path, method: 'get', class: "navbar-form" do %>
-                
+      			<ul class="nav navbar-nav navbar-left">
+              <li>
+                <%= form_tag search_profiles_path, method: 'get', class: "navbar-form" do %>
                   <%= text_field_tag :search, params[:search], class: "form-control" %>
                   <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
-                </li>
-                
-              <% end %>
+                <% end %>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %> <b class="caret"></b></a>
@@ -35,12 +36,25 @@
                 <li class="dropdown">
                   <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
                 </li>
-              <% else %>
+              <% elsif customer_signed_in? %>
                 <li class="dropdown">
-                  <%= link_to "Log In", new_user_session_path %>
+                  <%= link_to "Edit Profile", edit_customer_registration_path %>
                 </li>
                 <li class="dropdown">
-                  <%= link_to "Sign Up", new_user_registration_path %>
+                  <%= link_to "Sign Out", destroy_customer_session_path %>
+                </li>
+              <% else %>
+                <li class="dropdown">
+                  <%= link_to "Log In", new_customer_session_path %>
+                </li>
+                <li class="dropdown">
+                  <%= link_to "Sign Up", new_customer_registration_path %>
+                </li>
+                <li class="dropdown">
+                  <%= link_to "UXD Log In", new_user_session_path %>
+                </li>
+                <li class="dropdown">
+                  <%= link_to "UXD Sign Up", new_user_registration_path %>
                 </li>
               <% end %>          
       				<!-- <li class="dropdown">

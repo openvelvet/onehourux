@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
 
   def search
     if params[:search].present?
-      @profiles = Profile.search(params[:search]).facets(:title)
+      @profiles = Profile.search(params[:search])
     else
       @profiles = Profile.all
     end

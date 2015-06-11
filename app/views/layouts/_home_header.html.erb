@@ -10,30 +10,42 @@
           </div>
           <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
               <ul class="nav navbar-nav navbar-right">  
-                <% if user_signed_in? %>
+                <% if customer_signed_in? %>
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %> <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <% if current_user.profile.nil? %>
-                          <li><%= link_to "Create Profile", new_profile_path %></li>                         
-                        <% else %>
-                          <li><%= link_to "Account Settings", edit_user_registration_path %></li>
-                          <li><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></li>
-                          <li><%= link_to "View Profile", profile_path(current_user.profile) %></li>
-                        <% end %>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+                    <%= link_to "Sign Out", destroy_customer_session_path, method: :delete %>
                   </li>
                 <% else %>
-                  <li class="dropdown">
-                    <%= link_to "Log In", new_user_session_path %>
-                  </li>
-                  <li class="dropdown">
-                    <%= link_to "UX Designer Sign Up", new_user_registration_path %>
-                  </li>
-                <% end %>          
+                  <% if user_signed_in? %>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <% if current_user.profile.nil? %>
+                            <li><%= link_to "Create Profile", new_profile_path %></li>                         
+                          <% else %>
+                            <li><%= link_to "Account Settings", edit_user_registration_path %></li>
+                            <li><%= link_to "Edit Profile", edit_profile_path(current_user.profile) %></li>
+                            <li><%= link_to "View Profile", profile_path(current_user.profile) %></li>
+                          <% end %>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+                    </li>
+                  <% else %>
+                    <li class="dropdown">
+                      <%= link_to "Log In", new_customer_session_path %>
+                    </li>
+                    <li class="dropdown">
+                      <%= link_to "Sign Up", new_customer_registration_path %>
+                    </li>
+                    <li class="dropdown">
+                      <%= link_to "UXD Log In", new_user_session_path %>
+                    </li>
+                    <li class="dropdown">
+                      <%= link_to "UXD Sign Up", new_user_registration_path %>
+                    </li>
+                  <% end %>          
+                <% end %>
                   
                   
                   <!-- <li class="dropdown">

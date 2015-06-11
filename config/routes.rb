@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  devise_for :customers
+  
   get "tags/:tag" => "profiles#index", as: :tag
 
   post '/rate' => 'rater#create', :as => 'rate'
