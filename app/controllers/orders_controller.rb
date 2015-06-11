@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new, :create, :purchases]
+  before_action :authenticate_customer!, only: [:new, :create, :purchases]
 
   
 
@@ -17,7 +18,7 @@ class OrdersController < ApplicationController
         :amount => (@order.amount * 0.8572).floor,
         :currency => "usd",
         :destination => current_user.stripe_account,
-        :description => "Payment from #{@order.buyer_id}",
+        :description => "Payment from #{@order.customer.first_name}",
         :source_transaction => @order.charge_id
       )
       redirect_to root_path
@@ -35,8 +36,11 @@ class OrdersController < ApplicationController
 
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
-
   end
+
+  def purchases
+    @orders = Order.all.where(customer: current_customer).order("created_at DESC")
+  end  
 
   # GET /orders
   # GET /orders.json
@@ -67,7 +71,7 @@ class OrdersController < ApplicationController
     @seller = @profile.user
 
     @order.profile_id = @profile.id
-    @order.buyer_id = current_user.id
+    @order.customer_id = current_customer.id
     @order.seller_id = @seller.id
 
     Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
@@ -86,7 +90,7 @@ class OrdersController < ApplicationController
 
     @order.charge_id = charge.id
     @order.amount = charge.amount
-    current_user.save
+    current_customer.save
 
     respond_to do |format|
       if @order.save

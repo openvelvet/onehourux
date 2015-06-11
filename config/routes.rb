@@ -45,6 +45,7 @@ end
   get 'cindarella/:id' => "orders#cindarella"
   
   get "sales" => "orders#sales"
+  get "purchases" => "orders#purchases"
 
   # profiles controller
   get 'complete_profile' => "profiles#complete_profile" #show of /profiles/:id

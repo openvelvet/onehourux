@@ -41,7 +41,7 @@
                   <%= link_to "Edit Profile", edit_customer_registration_path %>
                 </li>
                 <li class="dropdown">
-                  <%= link_to "Sign Out", destroy_customer_session_path %>
+                  <%= link_to "Sign Out", destroy_customer_session_path, method: :delete %>
                 </li>
               <% else %>
                 <li class="dropdown">
