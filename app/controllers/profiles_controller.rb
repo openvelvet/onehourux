@@ -7,13 +7,7 @@ class ProfilesController < ApplicationController
   def bank_account
   end
 
-  def search
-    if params[:search].present?
-      @profiles = Profile.search(params[:search])
-    else
-      @profiles = Profile.all
-    end
-  end
+
 
   def update_bank_account
     @profile.user_id = current_user.id
