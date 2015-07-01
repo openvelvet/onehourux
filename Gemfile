@@ -27,6 +27,7 @@ gem 'mandrill-api', require: "mandrill"
 gem 'bootstrap_form'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'searchkick'
+gem 'ransack'
 
 group :development, :test do
   gem 'sqlite3'

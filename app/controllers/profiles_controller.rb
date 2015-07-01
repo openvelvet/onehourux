@@ -47,11 +47,8 @@ class ProfilesController < ApplicationController
   end
 
   def index
-    if params[:tag]
-      @profiles = Profile.tagged_with(params[:tag])
-    else
-      @profiles = Profile.all
-    end
+      @q = Profile.ransack(params[:q])
+      @profiles = @q.result.includes(:user)
   end
 
   # GET /profiles/1
