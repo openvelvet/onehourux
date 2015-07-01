@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-md-3">
-		<div class="caption">
+		<% if @profiles.present? %>
+					<div class="caption">
 			<h3>Filters</h3>
 			<%= search_form_for @q do |f| %>
 				<div class="form-group">
@@ -25,6 +26,8 @@
 				
 			<% end %>
 		</div> <!-- caption -->
+		<% end %>
+
 	</div> <!-- col-md-3 -->
 	<div class="col-md-9">
 		<% @profiles.each do |profile| %>
